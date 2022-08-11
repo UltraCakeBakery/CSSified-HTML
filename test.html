@@ -8,11 +8,14 @@
     </head>
     <body background-color="red" hover:background-color="orange">
         <div 
+            children:position="absolute"    
             children:top="0px"    
             children:left="0px"    
             children:width="200px"    
             children:height="200px"    
-            children:background-color="green"    
+            children:background-color="green"
+            children:transition="all .2s"  
+            children:hover:top="500px"  
         >
             <div></div>
             <div></div>
@@ -21,7 +24,7 @@
             <div></div>
         </div>
         <style>
-            [background-color="red"]{background-color:red}[hover\:background-color="orange"]:hover{background-color:orange}[children\:top="0px"] > *{top:0px}[children\:left="0px"] > *{left:0px}[children\:width="200px"] > *{width:200px}[children\:height="200px"] > *{height:200px}[children\:background-color="green"] > *{background-color:green}
+            [background-color="red"]{background-color:red}[hover\:background-color="orange"]:hover,[\:background-color="orange"]{background-color:orange}[children\:position="absolute"] > *{position:absolute}[children\:top="0px"] > *,[\:top="0px"]{top:0px}[children\:left="0px"] > *,[\:left="0px"]{left:0px}[children\:width="200px"] > *,[\:width="200px"]{width:200px}[children\:height="200px"] > *,[\:height="200px"]{height:200px}[children\:background-color="green"] > *,[\:background-color="green"]{background-color:green}[children\:transition="all .2s"] > *,[\:transition="all .2s"]{transition:all .2s}[children\:hover\:top="500px"] > *:hover,[\:top="500px"]{top:500px}
         </style>
     </body>
 </html>
