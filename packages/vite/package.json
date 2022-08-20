@@ -1,0 +1,35 @@
+{
+  "name": "@additional-css-attributes-for-html-elements/vite",
+  "version": "1.0.0",
+  "description": "The Vite plugin for additional-css-attributes-for-html-elements",
+  "author": "Jack van der Bilt <jackvdbilt@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsup src/index.ts --format esm,cjs",
+    "dev:watch": "tsup src/index.ts --format esm,cjs --watch",
+    "build": "tsup src/index.ts --format esm,cjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@ampproject/remapping": "^2.2.0",
+    "@rollup/pluginutils": "^4.2.1",
+    "magic-string": "^0.26.2"
+  },
+  "devDependencies": {
+    "@additional-css-attributes-for-html-elements/core": "workspace:*",
+    "vite": "^3.0.4"
+  },
+  "type": "module"
+}

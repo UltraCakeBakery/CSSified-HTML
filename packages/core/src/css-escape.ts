@@ -1,19 +1,20 @@
 // https://drafts.csswg.org/cssom/#serialize-an-identifier
-export default function CSSEscape( value ) {
-    let index = -1;
-    let codeUnit;
-    let result = '';
-    let firstCodeUnit = value.charCodeAt(0);
+export function CSSEscape( value: string ) {
+    let index = -1
+    let codeUnit
+    let result = ''
+    let firstCodeUnit = value.charCodeAt(0)
+
     while (++index < value.length) {
-        codeUnit = value.charCodeAt(index);
+        codeUnit = value.charCodeAt(index)
         // Note: there’s no need to special-case astral symbols, surrogate
         // pairs, or lone surrogates.
 
         // If the character is NULL (U+0000), then the REPLACEMENT CHARACTER
         // (U+FFFD).
         if (codeUnit == 0x0000) {
-            result += '\uFFFD';
-            continue;
+            result += '\uFFFD'
+            continue
         }
 
         if (
@@ -32,8 +33,8 @@ export default function CSSEscape( value ) {
             )
         ) {
             // https://drafts.csswg.org/cssom/#escape-a-character-as-code-point
-            result += '\\' + codeUnit.toString(16) + ' ';
-            continue;
+            result += '\\' + codeUnit.toString(16) + ' '
+            continue
         }
 
         if (
@@ -43,8 +44,8 @@ export default function CSSEscape( value ) {
             value.length == 1 &&
             codeUnit == 0x002D
         ) {
-            result += '\\' + value.charAt(index);
-            continue;
+            result += '\\' + value.charAt(index)
+            continue
         }
 
         // If the character is not handled by one of the above rules and is
@@ -60,14 +61,18 @@ export default function CSSEscape( value ) {
             codeUnit >= 0x0061 && codeUnit <= 0x007A
         ) {
             // the character itself
-            result += value.charAt(index);
-            continue;
+            result += value.charAt(index)
+            continue
         }
 
         // Otherwise, the escaped character.
         // https://drafts.csswg.org/cssom/#escape-a-character
-        result += '\\' + value.charAt(index);
+        result += '\\' + value.charAt(index)
 
     }
-    return result;
-};
+    return result
+}
+
+export function CSSEscapeFast( value: string ) {
+    return value.replaceAll(':', '\\:')
+}

@@ -1,13 +1,20 @@
 {
-  "name": "vite-css-properties-to-html-element-attributes",
+  "name": "additional-css-attributes-for-html-elements",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "pnpm -r dev",
+    "dev:watch": "pnpm -r dev:watch",
+    "build": "pnpm -r build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Jack van der Bilt",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^18.7.8",
+    "typescript": "^4.7.4",
+    "tsup": "^6.2.2"
+  },
   "type": "module"
 }
