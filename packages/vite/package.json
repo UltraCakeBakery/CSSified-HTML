@@ -1,8 +1,20 @@
 {
-  "name": "@additional-css-attributes-for-html-elements/vite",
-  "version": "1.0.0",
-  "description": "The Vite plugin for additional-css-attributes-for-html-elements",
-  "author": "Jack van der Bilt <jackvdbilt@gmail.com>",
+  "name": "@html-css-attributes/vite",
+  "version": "1.0.5",
+  "description": "The Vite plugin for html-css-attributes",
+  "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UltraCakeBakery/html-css-attributes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UltraCakeBakery/html-css-attributes/issues"
+  },
+  "homepage": "https://github.com/UltraCakeBakery/html-css-attributes/packages/vite#readme",
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/jackvanderbilt"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "tsup src/index.ts --format esm,cjs",
@@ -19,17 +31,9 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "@ampproject/remapping": "^2.2.0",
-    "@rollup/pluginutils": "^4.2.1",
-    "magic-string": "^0.26.2"
-  },
+  "files": ["dist"],
   "devDependencies": {
-    "@additional-css-attributes-for-html-elements/core": "workspace:*",
-    "vite": "^3.0.4"
+    "@html-css-attributes/core": "workspace:*"
   },
   "type": "module"
 }

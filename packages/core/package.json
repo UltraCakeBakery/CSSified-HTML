@@ -1,8 +1,20 @@
 {
-  "name": "@additional-css-attributes-for-html-elements/core",
-  "version": "1.0.0",
-  "description": "The Vite plugin for additional-css-attributes-for-html-elements",
-  "author": "Jack van der Bilt <jackvdbilt@gmail.com>",
+  "name": "html-css-attributes",
+  "version": "1.0.5",
+  "description": "Add every css properties as individual attributes on your html elements",
+  "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UltraCakeBakery/html-css-attributes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UltraCakeBakery/html-css-attributes/issues"
+  },
+  "homepage": "https://github.com/UltraCakeBakery/html-css-attributes#readme",
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/jackvanderbilt"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "tsup src/index.ts --format esm,cjs",
