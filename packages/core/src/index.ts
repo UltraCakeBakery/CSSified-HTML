@@ -29,7 +29,7 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
 
         if ( property === 'style' && !variants.length ) continue
         if ( blacklist.indexOf(property) !== -1 ) continue
-        if ( cssProperties.indexOf(property) === -1 && !(property.startsWith('--') || property.startsWith('var--')) ) continue
+        if ( cssProperties.indexOf(property) === -1 && !(property.indexOf('--') + property.indexOf('var--')) ) continue
 
         // Wrap the value
         if( valueWrapper !== null )
@@ -48,7 +48,7 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
             if(variant.startsWith('group-'))
             {
                 addToSelectorAfterVariants = selector
-                selector = `[group="${variant.split('-').pop() || ''}"]`
+                selector = `[group="${variant.substring(6) || ''}"]`
             }
             else if (variant === 'hover') selector += ':hover'
             else if (variant === 'active') selector += ':active'
