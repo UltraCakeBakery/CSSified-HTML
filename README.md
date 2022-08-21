@@ -1,6 +1,6 @@
 # [html-css-attributes](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/html-css-attributes.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/html-css-attributes.svg?style=flat)](https://www.npmjs.com/package/html-css-attributes) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-`html-css-attributes` - Add every CSS properties as individual attributes on to your html elements
+`html-css-attributes` - Configure html elements instead of writting css. Every css property now has its own attribute and the `style=""` attribute now supports `hover:style=""` states.
 
 ## Example
 ```html
