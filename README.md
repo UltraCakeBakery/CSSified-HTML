@@ -1,6 +1,6 @@
 # [html-css-attributes](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/html-css-attributes.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/html-css-attributes.svg?style=flat)](https://www.npmjs.com/package/html-css-attributes) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-`html-css-attributes` - Configure html elements instead of writting css. Every css property now has its own attribute and the `style=""` attribute now supports `hover:style=""` states.
+`html-css-attributes` - Don't write CSS. Simply add attributes to your HTML elements instead. With this library / vite-plugin you can add every CSS property to your html elements through their own unique attributes. We've also upgraded the `style=""` attribute allowing you to style based on state and media queries like so: `@dark:hover:style="background: red;"`. In other words; you can now style your pages without _truely_ never leaving your html.
 
 ## Features
 
@@ -8,6 +8,7 @@
 - 🤏 ~2kb min+gzip - Zero dependencies and browser friendly.
 - 🦾 Added variants to the `style=""` attribute. Now you can do stuff like `@dark-theme:hover:style="background: red; transform: scale(0.98)"
 - 📇 Named groups - For more complex UI's
+- 🔌Vite plugin for every framework (W.I.P)
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
 <!-- - [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping -->
 
@@ -33,7 +34,7 @@
 </html>
 ```
 ```
-generated css (0.232ms):
+generated css in 0.0385 milliseconds (average of 1_000_000 total runs):
 [font-family="Times New Roman, Times, serif"]{font-family:Times New Roman, Times, serif}[padding="0px"]{padding:0px}[margin="0px"]{margin:0px}[background-image="url('./background.png')"]{background-image:url('./background.png')}[\:width="123px"],[group="apple"] [group-apple\:width="123px"]{width:123px}[display="flex"]{display:flex}[justify-content="space-between"]{justify-content:space-between}[flex-direction="row"]{flex-direction:row}[width="100%"]{width:100%}[height="50px"]{height:50px}[display="inline-block"]{display:inline-block}[\:background="red"]{background:red}[border-radius="5px"]{border-radius:5px}[\:background-color="purple"],[background-color="purple"]{background-color:purple}[\:background-color="red"],[background-color="red"]{background-color:red}@media only print{[\@print\:background="red"]{background:red}}@media (prefers-color-scheme: dark){[\@dark\:background-color="red"]{background-color:red}}
 ```
 

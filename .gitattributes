@@ -1,5 +1,6 @@
 *.css linguist-detectable=false
 *.js linguist-detectable=false
+*.cjs linguist-detectable=false
 *.html linguist-detectable=false
 *.svelte linguist-detectable=false
 *.yaml linguist-detectable=false
