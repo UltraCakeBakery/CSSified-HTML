@@ -12,7 +12,7 @@ ___
 
 - 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (0.617ms generation time on really large components).
 - 🤏 ~2kb min+gzip - Zero dependencies and browser friendly.
-- 🦾 Added variants to the `style=""` attribute. Now you can do stuff like `@dark-theme:hover:style="background: red; transform: scale(0.98)"
+- 🦾 Added variants to the `style=""` attribute. Now you can do stuff like `@dark-theme:hover:style="background: red; transform: scale(0.98)"`
 - 📇 Named groups - For more complex UI's
 - 🔌Vite plugin for every framework (W.I.P)
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
