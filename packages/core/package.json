@@ -1,6 +1,6 @@
 {
   "name": "html-css-attributes",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Add every css properties as individual attributes on your html elements",
   "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
   "repository": {
@@ -17,9 +17,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "tsup src/index.ts --format esm,cjs",
-    "dev:watch": "tsup src/index.ts --format esm,cjs --watch",
-    "build": "tsup src/index.ts --format esm,cjs --minify"
+    "dev": "tsup src/index.ts --format esm,cjs,iife",
+    "dev:watch": "tsup src/index.ts --format esm,cjs,iife --watch",
+    "build": "tsup src/index.ts --format esm,cjs,iife --minify"
   },
   "exports": {
     ".": {

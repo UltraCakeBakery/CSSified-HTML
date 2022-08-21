@@ -33,6 +33,7 @@ Inspired by [UnoCSS](http://github.com/unocss/unocss)
 
 - No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (0.617ms generation time on really large components).
 - ~2kb min+gzip - Zero dependencies and browser friendly.
+- Added support for applying media queries and complex css selectors to the `style=""` attribute 
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
 <!-- - [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping -->
 
@@ -79,22 +80,15 @@ export default {
 
 Add `<style html-css-attributes></style>` to your frameworks components for which you want to generate css:
 
+## Syntactic sugar
+
+TODO: document `:var`
+TODO: document `:url`
+TODO: document `<variants>:style`
+
 ## Configurations
 
 TODO
-
-<!-- UnoCSS is an atomic-CSS engine instead of a framework. Everything is designed with flexibility and performance in mind. There are no core utilities in UnoCSS, all functionalities are provided via presets.
-
-By default, UnoCSS applies [the default preset](https://github.com/unocss/unocss/tree/main/packages/preset-uno), which provides a common superset of the popular utilities-first frameworks Tailwind CSS, Windi CSS, Bootstrap, Tachyons, etc.
-
-For example: `ml-3` (Tailwind), `ms-2` (Bootstrap), `ma4` (Tachyons), and `mt-10px` (Windi CSS) are all valid.
-
-```css
-.ma4 { margin: 1rem; }
-.ml-3 { margin-left: 0.75rem; }
-.ms-2 { margin-inline-start: 0.5rem; }
-.mt-10px { margin-top: 10px; }
-``` -->
 
 ## Acknowledgement
 

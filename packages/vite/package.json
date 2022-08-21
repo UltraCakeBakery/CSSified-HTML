@@ -1,7 +1,7 @@
 {
   "name": "@html-css-attributes/vite",
-  "version": "1.0.5",
-  "description": "The Vite plugin for html-css-attributes",
+  "version": "1.0.6",
+  "description": "The vite plugin for html-css-attributes",
   "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
   "repository": {
     "type": "git",
