@@ -2,34 +2,7 @@
 
 `html-css-attributes` - Configure html elements instead of writting css. Every css property now has its own attribute and the `style=""` attribute now supports `hover:style=""` states.
 
-## Example
-```html
-<html font-family="Times New Roman", Times, serif">
-    <head>
-        <title>Example website html</title>
-    </head>
-    <body padding="0px" margin="0px" background-image="url('./background.png')">
-        <nav display="flex" justify-content="space-between" flex-direction="row" width="100%" height="50px">
-            <div>
-                <a href="/home" display="inline-block">HOME</a>
-                <a href="/about" display="inline-block">ABOUT</a>
-                <a href="/contact" display="inline-block">CONTACT</a>
-            </div>
-            <div>
-                <button border-radius="5px" hover:background-color="purple">CALL ME</button>
-            </div>
-        </nav>
-    </body>
-</html>
-```
-```
-generated css (0.232ms):
-[padding="0px"]{padding:0px}[margin="0px"]{margin:0px}[background-image="url('./background')"]{background-image:url(}[display="flex"]{display:flex}[justify-content="space-between"]{justify-content:space-between}[flex-direction="row"]{flex-direction:row}[width="100%"]{width:100%}[height="50px"]{height:50px}[display="block"]{display:block}[border-radius="5px"]{border-radius:5px}[hover\:background-color="purple"]:hover{background-color:purple}
-```
-
 ## Features
-
-Inspired by [UnoCSS](http://github.com/unocss/unocss)
 
 - 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (0.617ms generation time on really large components).
 - 🤏 ~2kb min+gzip - Zero dependencies and browser friendly.
@@ -37,6 +10,32 @@ Inspired by [UnoCSS](http://github.com/unocss/unocss)
 - 📇 Named groups - For more complex UI's
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
 <!-- - [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping -->
+
+
+## Example
+```vue
+<html font-family="'Times New Roman', Times, serif">
+    <head>
+        <title>Example website html</title>
+    </head>
+    <body margin="0px" background-color="#F0F0F0" @dark:background-color="#020202" @dark:@high-contrast:background-color="black">
+        <nav display="flex" justify-content="space-between" flex-direction="row" width="100%" height="50px" @print:display="none">
+            <div hover:children:text-decoration="underline">
+                <a href="/home" display="inline-block">HOME</a>
+                <a href="/about" display="inline-block">ABOUT</a>
+                <a href="/contact" display="inline-block">CONTACT</a>
+            </div>
+            <div>
+                <button border-radius="2rem" hover:background-color="purple" border="none">CALL ME</button>
+            </div>
+        </nav>
+    </body>
+</html>
+```
+```
+generated css (0.232ms):
+[font-family="Times New Roman, Times, serif"]{font-family:Times New Roman, Times, serif}[padding="0px"]{padding:0px}[margin="0px"]{margin:0px}[background-image="url('./background.png')"]{background-image:url('./background.png')}[\:width="123px"],[group="apple"] [group-apple\:width="123px"]{width:123px}[display="flex"]{display:flex}[justify-content="space-between"]{justify-content:space-between}[flex-direction="row"]{flex-direction:row}[width="100%"]{width:100%}[height="50px"]{height:50px}[display="inline-block"]{display:inline-block}[\:background="red"]{background:red}[border-radius="5px"]{border-radius:5px}[\:background-color="purple"],[background-color="purple"]{background-color:purple}[\:background-color="red"],[background-color="red"]{background-color:red}@media only print{[\@print\:background="red"]{background:red}}@media (prefers-color-scheme: dark){[\@dark\:background-color="red"]{background-color:red}}
+```
 
 ###### Disclaimer
 > 🧪 `html-css-attributes` is not yet **production-ready** Expect breaking changes and complete redesigns in the near future.
@@ -55,12 +54,13 @@ tailwindcss  v3.1.4             497.24 ms / delta.    491.37 ms (x148.70)
 windicss     v3.5.5             869.47 ms / delta.    863.60 ms (x261.35)
 ``` -->
 
-## Installation
+## Getting Started
+If you want to use the css generator programatically, simply npm install `@html-css-attributes/core` and `import generator from '@html-css-attributes/core'.
 
-### CDN
-TODO
+#### CDN
+We do not yet have a recommended CDN.
 
-### Vite
+#### Vite
 
 ```bash
 npm install @html-css-attributes/vite --save-dev
