@@ -43,8 +43,14 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
 
         let selector = `[${CSSEscapeFast(name)}="${value}"]`
 
+        let addToSelectorAfterVariants = null
         for (const variant of variants) {
-            if (variant === 'hover') selector += ':hover'
+            if(variant.startsWith('group-'))
+            {
+                addToSelectorAfterVariants = selector
+                selector = `[group="${variant.split('-').pop() || ''}"]`
+            }
+            else if (variant === 'hover') selector += ':hover'
             else if (variant === 'active') selector += ':active'
             else if (variant === 'focus') selector += ':focus'
             else if (variant === 'before') selector += ':before'
@@ -58,6 +64,8 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
             else if (variant === 'odd') selector += ':nth-child(odd)'
             else if (variant === 'even') selector += ':nth-child(even)'
         }
+
+        if(addToSelectorAfterVariants) selector += ` ${addToSelectorAfterVariants}`
 
         if ( property === "content" ) value = `"${value}"`
 
