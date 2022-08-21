@@ -2,9 +2,30 @@
 
 `html-css-attributes` - Add every CSS properties as individual attributes on to your html elements
 
-###### Disclaimer
-> 🧪 `html-css-attributes` is not yet **production-ready** Expect breaking changes and complete redesigns in the near future.
-> We will update this note once we get closer to a stable v1.0 release.
+## Example
+```html
+<html font-family="Times New Roman", Times, serif">
+    <head>
+        <title>Example website html</title>
+    </head>
+    <body padding="0px" margin="0px" background-image="url('./background.png')">
+        <nav display="flex" justify-content="space-between" flex-direction="row" width="100%" height="50px">
+            <div>
+                <a href="/home" display="inline-block">HOME</a>
+                <a href="/about" display="inline-block">ABOUT</a>
+                <a href="/contact" display="inline-block">CONTACT</a>
+            </div>
+            <div>
+                <button border-radius="5px" hover:background-color="purple">CALL ME</button>
+            </div>
+        </nav>
+    </body>
+</html>
+```
+```
+generated css (0.232ms):
+[padding="0px"]{padding:0px}[margin="0px"]{margin:0px}[background-image="url('./background')"]{background-image:url(}[display="flex"]{display:flex}[justify-content="space-between"]{justify-content:space-between}[flex-direction="row"]{flex-direction:row}[width="100%"]{width:100%}[height="50px"]{height:50px}[display="block"]{display:block}[border-radius="5px"]{border-radius:5px}[hover\:background-color="purple"]:hover{background-color:purple}
+```
 
 ## Features
 
@@ -14,6 +35,10 @@ Inspired by [UnoCSS](http://github.com/unocss/unocss)
 - ~2kb min+gzip - Zero dependencies and browser friendly.
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
 <!-- - [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping -->
+
+###### Disclaimer
+> 🧪 `html-css-attributes` is not yet **production-ready** Expect breaking changes and complete redesigns in the near future.
+> We will update this note once we get closer to a stable v1.0 release.
 
 <!-- 
 ###### Benchmark
