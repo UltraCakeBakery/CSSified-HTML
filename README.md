@@ -81,11 +81,40 @@ export default {
 
 Add `<style html-css-attributes></style>` to your frameworks components for which you want to generate css:
 
-## Syntactic sugar
+# Documentation
+`html-css-attributes` makes a bunch of css related optionally configurable attributes available to all your html elements.
 
-TODO: document `:var`
-TODO: document `:url`
-TODO: document `<variants>:style`
+## CSS properties
+We have made a new attribute for every CSS property available on your HTML elements with an identical name to their corresponding css property.
+For example:
+
+- `display: flex` -> `<div display="flex"></div>`
+- `transform: scale(0.5)` -> `<div transform="scale(0.5)"></div>`
+- `background: #F0F0F0` -> `<div background="#F0F0F0"></div>`
+- `overflow: scroll` -> `<div overflow="scroll"></div>`
+
+## Variants
+TODO: add example explaining basics and advanced use cases like: 
+`hover:active:children:before:background="red"`
+
+## Media Queries
+Only want to apply a property on smaller screens, when printing the page or when dark theme is active? Simply prefix the attribute with the appropriate media-query-prefix.
+
+- `@media only print { display: flex }` -> `<div @print:display="flex"></div>`
+- `@media (prefers-color-scheme: dark) { transform: scale(0.5) }` -> `<div @dark:transform="scale(0.5)"></div>`
+- `@media (prefers-color-scheme: light) { background: #F0F0F0 }` -> `<div @light:background="#F0F0F0"></div>`
+- `@media (orientation: portrait) { overflow: scroll }` -> `<div @portrait:overflow="scroll"></div>`
+
+
+
+## Syntactic sugar
+We have also added some shortcuts to make your life easier.
+
+### the `:var` suffix
+Allows you to write `<div color:var="theme"></div>` instead of `<div color="var(--theme)"></div>`
+
+### the `:url` suffix
+Allows you to write `<div background:url="./background.svg"></div>` instead of `<div background="url('./background.svg')"></div>`
 
 ## Configurations
 
