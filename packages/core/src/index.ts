@@ -56,6 +56,8 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
             else if (variant === 'checked') selector += ':checked'
             else if (variant === 'disabled') selector += ':disabled'
             else if (variant === 'children') selector += ' > *'
+            else if (variant === 'odd') selector += ':nth-child(odd)'
+            else if (variant === 'even') selector += ':nth-child(even)'
         }
 
         if ( property === "content" ) value = `"${value}"`
