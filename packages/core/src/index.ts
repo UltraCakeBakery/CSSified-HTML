@@ -48,26 +48,27 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
             if(variant.startsWith('group-'))
             {
                 addToSelectorAfterVariants = selector
-                selector = `[group="${variant.substring(6) || ''}"]`
+                selector = `[group="${variant.substring(6)}"]`
             }
             else if (variant === 'hover') selector += ':hover'
             else if (variant === 'active') selector += ':active'
-            else if (variant === 'focus') selector += ':focus'
+            else if (variant === 'children') selector += ' > *'
             else if (variant === 'before') selector += ':before'
             else if (variant === 'after') selector += ':after'
             else if (variant === 'first') selector += ':first-child'
             else if (variant === 'last') selector += ':last-child'
+            else if (variant === 'focus') selector += ':focus'
             else if (variant === 'visited') selector += ':visited'
-            else if (variant === 'checked') selector += ':checked'
-            else if (variant === 'disabled') selector += ':disabled'
-            else if (variant === 'children') selector += ' > *'
             else if (variant === 'odd') selector += ':nth-child(odd)'
             else if (variant === 'even') selector += ':nth-child(even)'
+            else if (variant === 'checked') selector += ':checked'
+            else if (variant === 'disabled') selector += ':disabled'
         }
 
         if(addToSelectorAfterVariants) selector += ` ${addToSelectorAfterVariants}`
 
-        if ( property === "content" ) value = `"${value}"`
+        // Overwrite value for content
+        if ( property === "content" ) actualValue = `"${actualValue}"`
 
         const key = property !== 'style' ? `${property}:${actualValue}` : actualValue
         valuesAndTheirSelectors[key] ??= []
