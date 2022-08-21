@@ -74,5 +74,5 @@ export function CSSEscape( value: string ) {
 }
 
 export function CSSEscapeFast( value: string ) {
-    return value.replaceAll(':', '\\:')
+    return value.replaceAll(':', '\\:').replaceAll('@', '\\@')
 }

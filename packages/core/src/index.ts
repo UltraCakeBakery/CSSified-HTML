@@ -8,27 +8,27 @@ export function getAttributes( html = '' )
     return html.matchAll( /([a-zA-Z-_@:]*?)=["]([^"]*)/gm )
 }
 
-export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpMatchArray> )
+export function getMap( attributes: IterableIterator<RegExpMatchArray> )
 {
-    const valuesAndTheirSelectors = {} as { [key: string]: [string] }
+    const map = {} as { [key: string]: {[key: string]: [string]}}
 
     for (let [_, name, value ] of attributes) {
         if (!value) continue
         
-        const variants = name.split( ':' )
-        let property = variants.pop() as string
-        let valueWrapper = null
+        const prefixes = name.split( ':' )
+        let suffix = null
+        let property = prefixes.pop() as string
         let actualValue = value
 
         // Check if we should wrap the value later
-        if( variants.length >= 1 && ( property === 'url' || property === 'var' ) )
+        if( prefixes.length >= 1 && ( property === 'url' || property === 'var' ) )
         {
-            valueWrapper = property 
-            property = variants.pop() as string
+            suffix = property 
+            property = prefixes.pop() as string
         }
 
         // Continue if regular style=""
-        if ( property === 'style' && !variants.length ) continue
+        if ( property === 'style' && !prefixes.length ) continue
 
         // Continue if attribute is on blacklist
         if ( blacklist.indexOf(property) !== -1 ) continue
@@ -36,59 +36,92 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
         // Continue if not a valid css property and not a `css custom property`
         if ( cssProperties.indexOf(property) === -1 && !(property.indexOf('var--') !== -1 || property.indexOf('--') !== -1 ) ) continue
 
-        // Wrap the value
-        if( valueWrapper !== null )
+        // Wrap the value based on suffix
+        if( suffix !== null )
         {
-            if( valueWrapper === 'url' ) actualValue = `url('${value}')`
-            else if ( valueWrapper === 'var' ) actualValue = `var(--${value})`
+            if( suffix === 'url' ) actualValue = `url('${actualValue}')`
+            else if ( suffix === 'var' ) actualValue = `var(--${actualValue})`
         }
 
         // Allows for using `var--` suffix to workaround "'--banana' is not a valid attribute name" error in frameworks (Svelte..)
         if( property.indexOf('var--') !== -1 ) property = property.substring(3)
 
-        let selector = `[${CSSEscapeFast(name)}="${value}"]`
-
-        let addToSelectorAfterVariants = null
-        for (const variant of variants) {
-            if(variant.startsWith('group-'))
-            {
-                addToSelectorAfterVariants = selector
-                selector = `[group="${variant.substring(6)}"]`
-            }
-            else if (variant === 'hover') selector += ':hover'
-            else if (variant === 'active') selector += ':active'
-            else if (variant === 'children') selector += ' > *'
-            else if (variant === 'before') selector += ':before'
-            else if (variant === 'after') selector += ':after'
-            else if (variant === 'first') selector += ':first-child'
-            else if (variant === 'last') selector += ':last-child'
-            else if (variant === 'focus') selector += ':focus'
-            else if (variant === 'visited') selector += ':visited'
-            else if (variant === 'odd') selector += ':nth-child(odd)'
-            else if (variant === 'even') selector += ':nth-child(even)'
-            else if (variant === 'checked') selector += ':checked'
-            else if (variant === 'disabled') selector += ':disabled'
+        const entry = {
+            wrappingMediaQuery: { display: null, conditions: '' } as { [key: string]: null | string },
+            selector: `[${CSSEscapeFast(name)}="${value}"]`
         }
 
-        if( addToSelectorAfterVariants ) selector += ` ${addToSelectorAfterVariants}`
+        let addToSelectorAfterwards = null
+        for (const prefix of prefixes) {
+            if(prefix[0] === '@' )
+            {
+                if( prefix === '@screen' ) entry.wrappingMediaQuery.display = 'screen' 
+                else if( prefix === '@print' ) entry.wrappingMediaQuery.display = 'print'
+                else if( prefix === '@dark' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
+                else if( prefix === '@light' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
+            }
+            else if (prefix === 'hover') entry.selector += ':hover'
+            else if (prefix === 'active') entry.selector += ':active'
+            else if (prefix === 'children') entry.selector += ' > *'
+            else if (prefix === 'before') entry.selector += ':before'
+            else if (prefix === 'after') entry.selector += ':after'
+            else if (prefix === 'first') entry.selector += ':first-child'
+            else if (prefix === 'last') entry.selector += ':last-child'
+            else if (prefix === 'focus') entry.selector += ':focus'
+            else if (prefix === 'visited') entry.selector += ':visited'
+            else if (prefix === 'odd') entry.selector += ':nth-child(odd)'
+            else if (prefix === 'even') entry.selector += ':nth-child(even)'
+            else if (prefix === 'checked') entry.selector += ':checked'
+            else if (prefix === 'disabled') entry.selector += ':disabled'
+            else if(prefix.indexOf('group-') !== -1)
+            {
+                addToSelectorAfterwards = entry.selector
+                entry.selector = `[group="${prefix.substring(6)}"]`
+            }
+        }
+
+        if( addToSelectorAfterwards ) entry.selector += ` ${addToSelectorAfterwards}`
 
         // Overwrite value for content
         if ( property === "content" ) actualValue = `"${actualValue}"`
 
         const key = property !== 'style' ? `${property}:${actualValue}` : actualValue
-        valuesAndTheirSelectors[key] ??= []
-        valuesAndTheirSelectors[key].push(selector)
+
+        const mediaQueryString = getMediaQueryString(entry)
+        map[mediaQueryString] ??= {}
+        map[mediaQueryString][key] ??= []
+        map[mediaQueryString][key].push(entry.selector)
     }
 
-    return valuesAndTheirSelectors
+    return map
 }
 
-export function getCSSFromValuesAndTheirSelectors( valuesAndTheirSelectors = {} )
+export function getMediaQueryString( entry: any ) : string
+{
+    if( entry.wrappingMediaQuery.display )
+    {
+        let string = `only ${entry.wrappingMediaQuery.display}`
+        if( entry.wrappingMediaQuery.conditions.length ) string += 'and ' + entry.wrappingMediaQuery.conditions
+
+        return string
+    }
+    else return entry.wrappingMediaQuery.conditions || ''
+}
+
+export function getCSS( map = {} )
 {
     let css = ''
 
-    for (const [value, selectors] of Object.entries(valuesAndTheirSelectors)) {
-        css += `${[...new Set(selectors as [])]}{${value}}`
+    for ( const [media, valuesAndTheirSelectors] of Object.entries(map) )
+    {
+        const wrap = media.length && media !== 'screen'
+        if ( wrap ) css += `@media ${media}{`
+
+        for ( const [value, selectors] of Object.entries(valuesAndTheirSelectors as {})) {
+            css += `${[...new Set(selectors as [])]}{${value}}`
+        }
+
+        if ( wrap ) css += '}'
     }
 
     return css
@@ -97,7 +130,7 @@ export function getCSSFromValuesAndTheirSelectors( valuesAndTheirSelectors = {} 
 export default function generate( html: string )
 {
     const attributes = getAttributes(html)
-    const valuesAndTheirSelectors = getValuesAndTheirSelectors(attributes)
-    const css = getCSSFromValuesAndTheirSelectors(valuesAndTheirSelectors)
+    const map = getMap(attributes)
+    const css = getCSS(map)
     return css
 }
