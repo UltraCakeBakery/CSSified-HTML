@@ -1,7 +1,7 @@
 {
-  "name": "@html-css-attributes/vite",
+  "name": "@html-css-attributes/runtime",
   "version": "1.0.5",
-  "description": "The Vite plugin for html-css-attributes",
+  "description": "The runtime package for html-css-attributes",
   "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
   "repository": {
     "type": "git",
@@ -10,16 +10,16 @@
   "bugs": {
     "url": "https://github.com/UltraCakeBakery/html-css-attributes/issues"
   },
-  "homepage": "https://github.com/UltraCakeBakery/html-css-attributes/packages/vite#readme",
+  "homepage": "https://github.com/UltraCakeBakery/html-css-attributes/packages/runtime#readme",
   "funding": {
     "type": "patreon",
     "url": "https://www.patreon.com/jackvanderbilt"
   },
   "license": "MIT",
   "scripts": {
-    "dev": "tsup src/index.ts --format esm,cjs",
-    "dev:watch": "tsup src/index.ts --format esm,cjs --watch",
-    "build": "tsup src/index.ts --format esm,cjs --minify"
+    "dev": "tsup src/index.ts --format iife",
+    "dev:watch": "tsup src/index.ts --format iife --watch",
+    "build": "tsup src/index.ts --format iife --minify"
   },
   "exports": {
     ".": {

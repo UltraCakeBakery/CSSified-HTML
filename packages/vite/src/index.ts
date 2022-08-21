@@ -1,4 +1,4 @@
-import generate from "@additional-css-attributes-for-html-elements/core"
+import generate from "html-css-attributes"
 
 const toMatch = /(<style additional-attributes[^>]*>)/
 

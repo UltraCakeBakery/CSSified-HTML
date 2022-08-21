@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-        <title>Document</title>
+        <title>Runtime test</title>
+        <script defer src="../packages/runtime/dist/index.global.js"></script>
     </head>
-    <body background-color="red" hover:background-color="orange">
-        <div 
-            children:position="absolute"    
-            children:top="0px"    
-            children:left="0px"    
-            children:width="200px"    
-            children:height="200px"    
-            children:background-color="green"
-            children:transition="all .2s"  
-            children:hover:top="500px"  
-        >
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+    <body var--test="red" active:hover:children:color="banana" padding="0px" margin="0px" background-image:url="./background.png">
+        gello
     </body>
 </html>

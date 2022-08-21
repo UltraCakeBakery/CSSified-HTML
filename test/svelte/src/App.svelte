@@ -1,4 +1,4 @@
-<div background="pink" font-size="5rem" padding="20px" opacity="0.5" transform="rotate(90deg)">
+<div var--banana="red" color="var(--banana)">
   Hello world
 </div>
 
