@@ -29,7 +29,7 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
 
         if ( property === 'style' && !variants.length ) continue
         if ( blacklist.indexOf(property) !== -1 ) continue
-        if ( cssProperties.indexOf(property) === -1 && !(property.indexOf('--') + property.indexOf('var--')) ) continue
+        if ( cssProperties.indexOf(property) === -1 && !(property.indexOf('var--') !== -1 || property.indexOf('--') !== -1 ) ) continue
 
         // Wrap the value
         if( valueWrapper !== null )
@@ -39,7 +39,7 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
         }
 
         // Allows for using `var--` suffix to workaround "'--banana' is not a valid attribute name" error in frameworks (Svelte..)
-        if( property.startsWith('var--') ) property = property.substring(3)
+        if( property.indexOf('var--') !== -1 ) property = property.substring(3)
 
         let selector = `[${CSSEscapeFast(name)}="${value}"]`
 
