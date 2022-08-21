@@ -9,9 +9,7 @@ export default function plugin() {
         transform(code: string, id: string )
         {
             if ( !toMatch.test(code) ) return 
-            console.time('generated css')
             const css = generate(code)
-            console.timeEnd('generated css')
             if (css) return code.replace( toMatch, `$1${css}` )
         }
     }

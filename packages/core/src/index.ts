@@ -26,7 +26,6 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
             valueWrapper = property 
             property = variants.pop() as string
         }
-        console.log(property)
 
         if ( blacklist.indexOf(property) !== -1 ) continue
         if ( cssProperties.indexOf(property) === -1 && !(property.startsWith('--') || property.startsWith('var--')) ) continue
