@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "pnpm -r dev",
     "dev:watch": "pnpm -r dev:watch",
-    "build": "pnpm -r build"
+    "build": "pnpm -r build",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "eslint --ignore-path .gitignore --fix --ext .js,.ts"
   },
   "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
   "repository": {
@@ -23,10 +25,12 @@
     "url": "https://www.patreon.com/jackvanderbilt"
   },
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "@types/node": "^18.7.8",
     "typescript": "^4.7.4",
-    "tsup": "^6.2.2"
+    "tsup": "^6.2.2",
+    "eslint": "^8.21.0",
+    "eslint-plugin-import": "^2.26.0"
   },
   "type": "module"
 }
