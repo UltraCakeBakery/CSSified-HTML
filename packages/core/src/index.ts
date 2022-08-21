@@ -10,7 +10,7 @@ export function getAttributes( html = '' )
 
 export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpMatchArray> )
 {
-    const valuesAndTheirSelectors = {}
+    const valuesAndTheirSelectors = {} as { [key: string]: [string] }
 
     for (let [_, name, value ] of attributes) {
         if (!value) continue
@@ -27,8 +27,13 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
             property = variants.pop() as string
         }
 
+        // Continue if regular style=""
         if ( property === 'style' && !variants.length ) continue
+
+        // Continue if attribute is on blacklist
         if ( blacklist.indexOf(property) !== -1 ) continue
+
+        // Continue if not a valid css property and not a `css custom property`
         if ( cssProperties.indexOf(property) === -1 && !(property.indexOf('var--') !== -1 || property.indexOf('--') !== -1 ) ) continue
 
         // Wrap the value
@@ -65,7 +70,7 @@ export function getValuesAndTheirSelectors( attributes: IterableIterator<RegExpM
             else if (variant === 'disabled') selector += ':disabled'
         }
 
-        if(addToSelectorAfterVariants) selector += ` ${addToSelectorAfterVariants}`
+        if( addToSelectorAfterVariants ) selector += ` ${addToSelectorAfterVariants}`
 
         // Overwrite value for content
         if ( property === "content" ) actualValue = `"${actualValue}"`
