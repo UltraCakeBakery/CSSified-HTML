@@ -1,6 +1,12 @@
 # [html-css-attributes](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/html-css-attributes.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/html-css-attributes.svg?style=flat)](https://www.npmjs.com/package/html-css-attributes) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-`html-css-attributes` - Don't write CSS. Simply add attributes to your HTML elements instead. With this library / vite-plugin you can add every CSS property to your html elements through their own unique attributes. We've also upgraded the `style=""` attribute allowing you to style based on state and media queries like so: `@dark:hover:style="background: red;"`. In other words; you can now style your pages without _truely_ never leaving your html.
+_Don't write CSS, simply add attributes to your HTML elements instead!_
+
+------
+
+With this library / vite-plugin you can add every CSS property to your html elements through their own unique attributes. We've also upgraded the `style=""` attribute allowing you to style based on state and media queries like so: `@dark:hover:style="background: red;"`. In other words; you can now style your pages without _truely_ never leaving your html.
+
+___
 
 ## Features
 
