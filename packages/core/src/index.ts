@@ -88,16 +88,16 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
     return map
 }
 
-export function getMediaQueryString( entry: any ) : string
+export function getMediaQueryString( entry: any )
 {
     if ( entry.wrappingMediaQuery.display )
     {
-        let string = entry.wrappingMediaQuery.display
-        if ( entry.wrappingMediaQuery.conditions.length ) string += 'and ' + entry.wrappingMediaQuery.conditions
+        let string = entry.wrappingMediaQuery.display as string
+        if ( entry.wrappingMediaQuery.conditions.length ) string += ` and ${entry.wrappingMediaQuery.conditions}`
 
         return string
     }
-    else return entry.wrappingMediaQuery.conditions || ''
+    else return entry.wrappingMediaQuery.conditions as string || ''
 }
 
 export function getCSS( map: { [key: string]: {[ key: string ]: [string] } } = {} )
@@ -106,13 +106,11 @@ export function getCSS( map: { [key: string]: {[ key: string ]: [string] } } = {
 
     for ( const [ media, valuesAndTheirSelectors ] of Object.entries( map ) )
     {
-        const wrap = media.length && media !== 'screen'
-
-        if ( wrap ) css += `@media ${media}{`
+        if ( media ) css += `@media ${media}{`
 
         for ( const [ value, selectors ] of Object.entries( valuesAndTheirSelectors as {}) ) css += `${[ ...new Set( selectors as [] ) ]}{${value}}`
 
-        if ( wrap ) css += '}'
+        if ( media ) css += '}'
     }
 
     return css
