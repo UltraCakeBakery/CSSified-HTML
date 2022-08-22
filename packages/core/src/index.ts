@@ -10,7 +10,10 @@ export function getAttributes( html = '' )
 
 export function getMap( attributes: IterableIterator<RegExpMatchArray> )
 {
-    const map = {} as { [key: string]: {[ key: string ]: any } }
+    const map = { 
+        medias: {}, 
+        propertyCounts: {}
+    }
 
     for ( let [ _, name, value ] of attributes )
     {
@@ -43,10 +46,10 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
             else if ( suffix === 'var' ) actualValue = `var(--${actualValue})`
             else actualValue = `${suffix}(${actualValue})`
         }
-
+        
         const entry = {
             wrappingMediaQuery: { display: null, conditions: '' } as { [key: string]: null | string },
-            selector: `[${CSSEscapeFast(name)}="${value}"]`
+            selector: `[${CSSEscapeFast(name)}${map.propertyCounts[property] > 0 ? `="${value}"` : ''}]`
         }
         
         let addToSelectorAfterwards = null
@@ -90,9 +93,11 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
 
         const key = property !== 'style' ? `${property}:${actualValue}` : actualValue
 
-        map[mediaQueryString] ??= {}
-        map[mediaQueryString][key] ??= []
-        map[mediaQueryString][key].push(entry.selector)
+        map.medias[mediaQueryString] ??= {}
+        map.medias[mediaQueryString][key] ??= []
+        map.medias[mediaQueryString][key].push(entry.selector)
+        map.propertyCounts[property] ??= 0
+        map.propertyCounts[property] += 1
     }
 
     return map
@@ -102,7 +107,7 @@ export function getCSS( map: { [key: string]: {[ key: string ]: [string] } } = {
 {
     let css = ''
 
-    for ( const [ media, valuesAndTheirSelectors ] of Object.entries( map ) )
+    for ( const [ media, valuesAndTheirSelectors ] of Object.entries( map.medias ) )
     {
         if ( media ) css += `@media ${media}{`
 
