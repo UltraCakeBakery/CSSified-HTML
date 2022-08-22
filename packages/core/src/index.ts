@@ -23,7 +23,7 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         let actualValue = value
 
         // Check if we should wrap the value later
-        if ( prefixes.length >= 1 && ( property === 'url' || property === 'var'|| property === 'calc' ) )
+        if ( prefixes.length > 0 && propertyWhitelist.indexOf( property ) === -1 && property.indexOf( '--' ) === -1 )
         {
             suffix = property 
             property = prefixes.pop() as string
