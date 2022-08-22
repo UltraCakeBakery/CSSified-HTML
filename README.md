@@ -1,18 +1,16 @@
 # [html-css-attributes](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/html-css-attributes.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/html-css-attributes.svg?style=flat)](https://www.npmjs.com/package/html-css-attributes) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-If you are already familiar with Tailwind CSS or similair projects, think of html-css-attributes as an **HTML friendly** alternative, which provides a more **natural feeling developer experience** and the **fastest performance** on the block. html-css-attributes brings a whole bunch of **additional cool features** to your HTML elements to that take your codebase to the **next level**, by taking one step back and **two steps forward**.
+If you are already familiar with Tailwind CSS or similair projects, think of html-css-attributes as an **HTML friendly** alternative, which provides a more **natural feeling developer experience** while being the **best performer** in every relevant context. html-css-attributes brings a whole bunch of **additional cool features** to your HTML elements through custom attributes, allowing you to take your codebase to the **next level**, by taking one step back in complexity and two steps forward in **understandability**. 
 
 ## Features
 - 🦾 Every CSS property, selector and media query is now available as attributes on your HTML elements. [Full list](#documentation)
 - 🧑‍🎨 The `style=""` attribute now also supports states (`hover:style=""`), media query `@landscape:style=""` [and more](#documentation)
-- 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** with less than 0.5ms average css generation per component.
+- 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (< 0.5ms average)
 - 🤏 ~3kb min+gzip - Zero dependencies and browser friendly.
 - 🔌A Vite plugin is available for every framework (with SSR support) (W.I.P)
 - 📇 Named groups - For more complex UI and senarios. Simply `group="banana"` and `group-banana:hover:background-color="red"` 
-
+- 🛣️ [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping and managing design systems
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
-<!-- - [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping -->
-
 
 ## Example
 ```vue
@@ -62,7 +60,7 @@ If you want to use the css generator programatically, simply npm install `@html-
 #### CDN
 We do not yet have a recommended CDN.
 
-#### Vite
+#### Vite (W.I.P)
 
 ```bash
 npm install @html-css-attributes/vite --save-dev
@@ -81,10 +79,8 @@ export default {
 }
 ```
 
-Add `<style html-css-attributes></style>` to your frameworks components for which you want to generate css:
-
 # Documentation
-`html-css-attributes` makes a bunch of css related optionally configurable attributes available to all your html elements.
+Our documentation / demo website is not yet finished. For now you can read the instructions below. If you have any questions, feel free to raise an issue.
 
 ## CSS properties
 We have made a new attribute for every CSS property available on your HTML elements with an identical name to their corresponding css property.
@@ -100,26 +96,30 @@ TODO: add example explaining basics and advanced use cases like:
 `hover:active:children:before:background="red"`
 
 ## Media Queries
-Only want to apply a property on smaller screens, when printing the page or when dark theme is active? Simply prefix the attribute with the appropriate media-query-prefix.
+Only want to apply a property on smaller screens, when printing the page and/or when dark theme is active? Simply prefix the attribute with the appropriate media-query-prefix.
 
 - `@media only print { display: flex }` -> `<div @print:display="flex"></div>`
 - `@media (prefers-color-scheme: dark) { transform: scale(0.5) }` -> `<div @dark:transform="scale(0.5)"></div>`
 - `@media (prefers-color-scheme: light) { background: #F0F0F0 }` -> `<div @light:background="#F0F0F0"></div>`
 - `@media (orientation: portrait) { overflow: scroll }` -> `<div @portrait:overflow="scroll"></div>`
 
+You can also stack media-query-prefixes like so:
 
+`<div @portrait:@dark:@print:background="inherit"></div>`
 
 ## Syntactic sugar
 We have also added some shortcuts to make your life easier.
 
-### the `:var` suffix
+### The `:var` suffix
 Allows you to write `<div color:var="theme"></div>` instead of `<div color="var(--theme)"></div>`
 
-### the `:url` suffix
+### The `:url` suffix
 Allows you to write `<div background:url="./background.svg"></div>` instead of `<div background="url('./background.svg')"></div>`
 
 ## Configurations
+The following options are available on the Vite plugin:
 
+### Shortcuts
 TODO
 
 ## Acknowledgement
