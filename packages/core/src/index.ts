@@ -37,7 +37,7 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         if( attributeNameBlacklist.indexOf(name) !== -1 ) continue
 
         // Continue if property is not on the whitelist and it is also not a custom css property
-        if ( propertyWhitelist.indexOf( property ) === -1 && !( property.indexOf( 'var--' ) !== -1 || property.indexOf( '--' ) !== -1 ) ) continue
+        if ( propertyWhitelist.indexOf( property ) === -1 && property.indexOf( '--' ) === -1 ) continue
 
         // Wrap the value based on suffix
         if ( suffix !== null )
@@ -47,7 +47,6 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
             else actualValue = `${suffix}(${actualValue})`
         }
 
-        if ( property.indexOf( 'var--' ) !== -1 ) property = property.substring( 3 )
         const entry = {
             wrappingMediaQuery: { display: null, conditions: '' } as { [key: string]: null | string },
             selector: `[${CSSEscapeFast(name)}="${value}"]`
