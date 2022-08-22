@@ -57,7 +57,6 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         {
             if ( prefix[0] === '@' )
             {
-                console.log(prefix)
                 if ( prefix === '@screen' ) entry.wrappingMediaQuery.display = 'screen'
                 else if ( prefix === '@print' ) entry.wrappingMediaQuery.display = 'print'
                 else if ( prefix.startsWith('@only-') ) entry.wrappingMediaQuery.display = 'only ' + prefix.substring(6)
