@@ -23,7 +23,7 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         let actualValue = value
 
         // Check if we should wrap the value later
-        if ( prefixes.length > 0 && propertyWhitelist.indexOf( property ) === -1 && property.indexOf( '--' ) === -1 )
+        if ( prefixes.length > 0 && propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' )
         {
             suffix = property 
             property = prefixes.pop() as string
@@ -37,7 +37,7 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         if( attributeNameBlacklist.indexOf(name) !== -1 ) continue
 
         // Continue if property is not on the whitelist and it is also not a custom css property
-        if ( propertyWhitelist.indexOf( property ) === -1 && property.indexOf( '--' ) === -1 ) continue
+        if ( propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' ) continue
 
         // Wrap the value based on suffix
         if ( suffix !== null )
