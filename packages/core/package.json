@@ -34,5 +34,8 @@
   "files": [
     "dist"
   ],
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "reduce-css-calc": "^2.1.8"
+  }
 }
