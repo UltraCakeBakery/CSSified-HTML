@@ -31,6 +31,7 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
 
         // Continue if regular style=''
         if ( property === 'style' && !prefixes.length ) continue
+        else if ( property === 'content' ) actualValue = `'${actualValue}'`
 
         // Continue if attribute name is on the blacklist
         if( attributeNameBlacklist.indexOf(name) !== -1 ) continue
@@ -47,11 +48,9 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         }
 
         if ( property.indexOf( 'var--' ) !== -1 ) property = property.substring( 3 )
-        if ( property === 'content' ) actualValue = `'${actualValue}'`
-
         const entry = {
             wrappingMediaQuery: { display: null, conditions: '' } as { [key: string]: null | string },
-            selector: `[${CSSEscapeFast(name)}='${value}']`
+            selector: `[${CSSEscapeFast(name)}="${value}"]`
         }
 
         let addToSelectorAfterwards = null
@@ -60,7 +59,7 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
             if ( prefix[0] === '@' )
             {
                 if ( prefix === '@screen' ) entry.wrappingMediaQuery.display = 'screen'
-                else if ( prefix === '@only-screen' ) entry.wrappingMediaQuery.display = ' screen'
+                else if ( prefix === '@only-screen' ) entry.wrappingMediaQuery.display = 'only screen'
                 else if ( prefix === '@print' ) entry.wrappingMediaQuery.display = 'print'
                 else if ( prefix === '@only-print' ) entry.wrappingMediaQuery.display = 'only print'
                 else if ( prefix === '@dark' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
@@ -73,7 +72,7 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
             else if ( prefix.indexOf( 'group-' ) !== -1)
             {
                 addToSelectorAfterwards = entry.selector
-                entry.selector = `[group='${prefix.substring(6)}']`
+                entry.selector = `[group="${prefix.substring(6)}"]`
             }
             else entry.selector += `:${prefix}`
         }
