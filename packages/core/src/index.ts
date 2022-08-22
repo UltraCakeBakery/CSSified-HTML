@@ -56,17 +56,20 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         let addToSelectorAfterwards = null
         for ( const prefix of prefixes )
         {
-            if( prefix[0] === '@' )
+            if ( prefix[0] === '@' )
             {
-                if( prefix === '@screen' ) entry.wrappingMediaQuery.display = 'screen' 
-                else if( prefix === '@print' ) entry.wrappingMediaQuery.display = 'print'
-                else if( prefix === '@dark' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
-                else if( prefix === '@light' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
+                if ( prefix === '@screen' ) entry.wrappingMediaQuery.display = 'screen'
+                else if ( prefix === '@only-screen' ) entry.wrappingMediaQuery.display = ' screen'
+                else if ( prefix === '@print' ) entry.wrappingMediaQuery.display = 'print'
+                else if ( prefix === '@only-print' ) entry.wrappingMediaQuery.display = 'only print'
+                else if ( prefix === '@dark' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
+                else if ( prefix === '@light' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
             }
-            else if ( prefix === 'odd' ) entry.selector += ':nth-child(odd)'
-            else if ( prefix === 'even' ) entry.selector += ':nth-child(even)'
+            else if ( prefix.indexOf('nth-child') !== -1 ) entry.selector += ':nth-child-' + prefix.substring(9)
+            else if ( prefix.indexOf('nth-of-type') !== -1 ) entry.selector += ':nth-of-type-' + prefix.substring(12)
             else if ( prefix === 'children' ) entry.selector += ' > *'
-            else if( prefix.indexOf('group-' ) !== -1)
+            else if ( prefix === 'siblings' ) entry.selector += ' + *'
+            else if ( prefix.indexOf( 'group-' ) !== -1)
             {
                 addToSelectorAfterwards = entry.selector
                 entry.selector = `[group='${prefix.substring(6)}']`
@@ -90,7 +93,7 @@ export function getMediaQueryString( entry: any ) : string
 {
     if ( entry.wrappingMediaQuery.display )
     {
-        let string = `only ${entry.wrappingMediaQuery.display}`
+        let string = entry.wrappingMediaQuery.display
         if ( entry.wrappingMediaQuery.conditions.length ) string += 'and ' + entry.wrappingMediaQuery.conditions
 
         return string
