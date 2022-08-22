@@ -1,20 +1,15 @@
 # [html-css-attributes](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/html-css-attributes.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/html-css-attributes.svg?style=flat)](https://www.npmjs.com/package/html-css-attributes) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-_Don't write CSS, simply add attributes to your HTML elements instead!_
-
-------
-
-With this library / vite-plugin you can add every CSS property to your html elements through their own unique attributes. We've also upgraded the `style=""` attribute allowing you to style based on state and media queries like so: `@dark:hover:style="background: red;"`. In other words; you can now style your pages without _truely_ never leaving your html.
-
-___
+If you are already familiar with Tailwind CSS or similair projects, think of html-css-attributes as an **HTML friendly** alternative, which provides a more **natural feeling developer experience** and the **fastest performance** on the block. html-css-attributes brings a whole bunch of **additional cool features** to your HTML elements to that take your codebase to the **next level**, by taking one step back and **two steps forward**.
 
 ## Features
+- 🦾 Every CSS property, selector and media query is now available as attributes on your HTML elements. [Full list](#documentation)
+- 🧑‍🎨 The `style=""` attribute now also supports states (`hover:style=""`), media query `@landscape:style=""` [and more](#documentation)
+- 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** with less than 0.5ms average css generation per component.
+- 🤏 ~3kb min+gzip - Zero dependencies and browser friendly.
+- 🔌A Vite plugin is available for every framework (with SSR support) (W.I.P)
+- 📇 Named groups - For more complex UI and senarios. Simply `group="banana"` and `group-banana:hover:background-color="red"` 
 
-- 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (0.617ms generation time on really large components).
-- 🤏 ~2kb min+gzip - Zero dependencies and browser friendly.
-- 🦾 Added variants to the `style=""` attribute. Now you can do stuff like `@dark-theme:hover:style="background: red; transform: scale(0.98)"`
-- 📇 Named groups - For more complex UI's
-- 🔌Vite plugin for every framework (W.I.P)
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
 <!-- - [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping -->
 
