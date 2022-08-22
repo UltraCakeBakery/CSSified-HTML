@@ -58,9 +58,8 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
             if ( prefix[0] === '@' )
             {
                 if ( prefix === '@screen' ) entry.wrappingMediaQuery.display = 'screen'
-                else if ( prefix === '@only-screen' ) entry.wrappingMediaQuery.display = 'only screen'
                 else if ( prefix === '@print' ) entry.wrappingMediaQuery.display = 'print'
-                else if ( prefix === '@only-print' ) entry.wrappingMediaQuery.display = 'only print'
+                else if ( prefix.startsWith('@only-') ) entry.wrappingMediaQuery.display = 'only ' + prefix.substring(6)
                 else if ( prefix === '@dark' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
                 else if ( prefix === '@light' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
             }
@@ -75,7 +74,7 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
             }
             else entry.selector += `:${prefix}`
         }
-        if( addToSelectorAfterwards ) entry.selector += ` ${addToSelectorAfterwards}`
+        if ( addToSelectorAfterwards ) entry.selector += ` ${addToSelectorAfterwards}`
 
         const mediaQueryString = getMediaQueryString(entry)
         const key = property !== 'style' ? `${property}:${actualValue}` : actualValue
