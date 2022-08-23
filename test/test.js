@@ -7,4 +7,5 @@ const time = performance.now()
 generate(html)
 const finalTime = performance.now()
 console.log(( finalTime - time ))
+console.log(generate(html))
 

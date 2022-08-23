@@ -1,18 +1,19 @@
 import type { Map } from './types'
 
 export const propertyWhitelist = [ 'content', 'style', 'align-content', 'align-items', 'align-self', 'alignment-baseline', 'all', 'animation', 'animation-delay', 'animation-direction', 'animation-duration', 'animation-fill-mode', 'animation-iteration-count', 'animation-name', 'animation-play-state', 'animation-timing-function', 'appearance', 'azimuth', 'backface-visibility', 'background', 'background-attachment', 'background-blend-mode', 'background-clip', 'background-color', 'background-image', 'background-origin', 'background-position', 'background-repeat', 'background-size', 'baseline-shift', 'block-step', 'block-step-align', 'block-step-insert', 'block-step-round', 'block-step-size', 'bookmark-label', 'bookmark-level', 'bookmark-state', 'border', 'border-bottom', 'border-bottom-color', 'border-bottom-left-radius', 'border-bottom-right-radius', 'border-bottom-style', 'border-bottom-width', 'border-boundary', 'border-collapse', 'border-color', 'border-image', 'border-image-outset', 'border-image-repeat', 'border-image-slice', 'border-image-source', 'border-image-width', 'border-left', 'border-left-color', 'border-left-style', 'border-left-width', 'border-radius', 'border-right', 'border-right-color', 'border-right-style', 'border-right-width', 'border-spacing', 'border-style', 'border-top', 'border-top-color', 'border-top-left-radius', 'border-top-right-radius', 'border-top-style', 'border-top-width', 'border-width', 'bottom', 'box-decoration-break', 'box-shadow', 'box-sizing', 'box-snap', 'break-after', 'break-before', 'break-inside', 'caption-side', 'caret', 'caret-animation', 'caret-color', 'caret-shape', 'chains', 'clear', 'clip', 'clip-path', 'clip-rule', 'color', 'color-adjust', 'color-interpolation-filters', 'column-count', 'column-fill', 'column-gap', 'column-rule', 'column-rule-color', 'column-rule-style', 'column-rule-width', 'column-span', 'column-width', 'columns', 'contain',  'continue', 'counter-increment', 'counter-reset', 'counter-set', 'cue', 'cue-after', 'cue-before', 'cursor', 'direction', 'display', 'dominant-baseline', 'elevation', 'empty-cells', 'filter', 'flex', 'flex-basis', 'flex-direction', 'flex-flow', 'flex-grow', 'flex-shrink', 'flex-wrap', 'float', 'float-defer', 'float-offset', 'float-reference', 'flood-color', 'flood-opacity', 'flow', 'flow-from', 'flow-into', 'font', 'font-family', 'font-feature-settings', 'font-kerning', 'font-language-override', 'font-size', 'font-size-adjust', 'font-stretch', 'font-style', 'font-synthesis', 'font-variant', 'font-variant-alternates', 'font-variant-caps', 'font-variant-east-asian', 'font-variant-ligatures', 'font-variant-numeric', 'font-variant-position', 'font-weight', 'footnote-display', 'footnote-policy', 'gap', 'glyph-orientation-vertical', 'grid', 'grid-area', 'grid-auto-columns', 'grid-auto-flow', 'grid-auto-rows', 'grid-column', 'grid-column-end', 'grid-column-gap', 'grid-column-start', 'grid-gap', 'grid-row', 'grid-row-end', 'grid-row-gap', 'grid-row-start', 'grid-template', 'grid-template-areas', 'grid-template-columns', 'grid-template-rows', 'hanging-punctuation', 'height', 'hyphenate-character', 'hyphenate-limit-chars', 'hyphenate-limit-last', 'hyphenate-limit-lines', 'hyphenate-limit-zone', 'hyphens', 'image-orientation', 'image-rendering', 'image-resolution', 'initial-letter', 'initial-letter-align', 'initial-letter-wrap', 'isolation', 'justify-content', 'justify-items', 'justify-self', 'left', 'letter-spacing', 'lighting-color', 'line-break', 'line-grid', 'line-height', 'line-height-step', 'line-snap', 'list-style', 'list-style-image', 'list-style-position', 'list-style-type', 'margin', 'margin-bottom', 'margin-left', 'margin-right', 'margin-top', 'marker', 'marker-end', 'marker-knockout-left', 'marker-knockout-right', 'marker-mid', 'marker-pattern', 'marker-segment', 'marker-side', 'marker-start', 'marquee-direction', 'marquee-loop', 'marquee-speed', 'marquee-style', 'mask', 'mask-border', 'mask-border-mode', 'mask-border-outset', 'mask-border-repeat', 'mask-border-slice', 'mask-border-source', 'mask-border-width', 'mask-clip', 'mask-composite', 'mask-image', 'mask-mode', 'mask-origin', 'mask-position', 'mask-repeat', 'mask-size', 'mask-type', 'max-height', 'max-lines', 'max-width', 'min-height', 'min-width', 'mix-blend-mode', 'motion', 'motion-offset', 'motion-path', 'motion-rotation', 'nav-down', 'nav-left', 'nav-right', 'nav-up', 'object-fit', 'object-position', 'offset', 'offset-after', 'offset-anchor', 'offset-before', 'offset-distance', 'offset-end', 'offset-path', 'offset-position', 'offset-rotate', 'offset-start', 'opacity', 'order', 'orphans', 'outline', 'outline-color', 'outline-offset', 'outline-style', 'outline-width', 'overflow', 'overflow-style', 'overflow-wrap', 'overflow-x', 'overflow-y', 'padding', 'padding-bottom', 'padding-left', 'padding-right', 'padding-top', 'page', 'page-break-after', 'page-break-before', 'page-break-inside', 'pause', 'pause-after', 'pause-before', 'perspective', 'perspective-origin', 'pitch', 'pitch-range', 'place-content', 'place-items', 'place-self', 'play-during', 'position', 'presentation-level', 'quotes', 'region-fragment', 'resize', 'rest', 'rest-after', 'rest-before', 'richness', 'right', 'rotation', 'rotation-point', 'ruby-align', 'ruby-merge', 'ruby-position', 'running', 'scroll-behavior', 'scroll-padding', 'scroll-padding-block', 'scroll-padding-block-end', 'scroll-padding-block-start', 'scroll-padding-bottom', 'scroll-padding-inline', 'scroll-padding-inline-end', 'scroll-padding-inline-start', 'scroll-padding-left', 'scroll-padding-right', 'scroll-padding-top', 'scroll-snap-align', 'scroll-snap-margin', 'scroll-snap-margin-block', 'scroll-snap-margin-block-end', 'scroll-snap-margin-block-start', 'scroll-snap-margin-bottom', 'scroll-snap-margin-inline', 'scroll-snap-margin-inline-end', 'scroll-snap-margin-inline-start', 'scroll-snap-margin-left', 'scroll-snap-margin-right', 'scroll-snap-margin-top', 'scroll-snap-stop', 'scroll-snap-type', 'scrollbar-gutter', 'shape-image-threshold', 'shape-inside', 'shape-margin', 'shape-outside', 'size', 'speak', 'speak-as', 'speak-header', 'speak-numeral', 'speak-punctuation', 'speech-rate', 'stress', 'string-set', 'stroke', 'stroke-alignment', 'stroke-dashadjust', 'stroke-dasharray', 'stroke-dashcorner', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'tab-size', 'table-layout', 'text-align', 'text-align-all', 'text-align-last', 'text-combine-upright', 'text-decoration', 'text-decoration-color', 'text-decoration-line', 'text-decoration-skip', 'text-decoration-style', 'text-emphasis', 'text-emphasis-color', 'text-emphasis-position', 'text-emphasis-style', 'text-indent', 'text-justify', 'text-orientation', 'text-overflow', 'text-shadow', 'text-space-collapse', 'text-space-trim', 'text-spacing', 'text-transform', 'text-underline-position', 'text-wrap', 'top', 'transform', 'transform-box', 'transform-origin', 'transform-style', 'transition', 'transition-delay', 'transition-duration', 'transition-property', 'transition-timing-function', 'unicode-bidi', 'user-select', 'vertical-align', 'visibility', 'voice-balance', 'voice-duration', 'voice-family', 'voice-pitch', 'voice-range', 'voice-rate', 'voice-stress', 'voice-volume', 'volume', 'white-space', 'widows', 'width', 'will-change', 'word-break', 'word-spacing', 'word-wrap', 'wrap-after', 'wrap-before', 'wrap-flow', 'wrap-inside', 'wrap-through', 'writing-mode', 'z-index' ]
+export const htmlRegex = /<(?![\/!])(?:([\w:]*)[ ]?(.*?))>/gm
 export const attributeRegex = /([a-zA-Z0-9-_@:]*?)=["]([^"]*)/gm
 
 export function escapeSelector( value: string ) {
     return value.replaceAll(':', '\\:').replaceAll('@', '\\@')
 }
 
-export function getAttributes( html = '' )
+export function getElements( html = '' )
 {
-    return html.matchAll( attributeRegex )
+    return html.matchAll(htmlRegex)
 }
 
-export function getMap( attributes: IterableIterator<RegExpMatchArray> )
+export function getMap( elements: IterableIterator<RegExpMatchArray> )
 {
     const map: Map = { 
         imports: [],
@@ -21,106 +22,113 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         propertyCounts: {}
     }
 
-    for ( let [ _, attributeName, attributeValue ] of attributes )
+    for ( let [ _, tag, attributes ] of elements )
     {
-        if ( !attributeValue || attributeName === 'content' ) continue
+        if( !attributes.length ) continue
         
-        const prefixes = attributeName.split( ':' )
-        let suffix = null
-        let property = prefixes.pop() as string
-        let propertyValue = attributeValue
+        const attributesRegex = attributes.matchAll(attributeRegex)
 
-        // Check if we should wrap the value later
-        if ( prefixes.length > 0 && propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' )
+        for ( let [_, attributeName, attributeValue] of attributesRegex )
         {
-            suffix = property 
-            property = prefixes.pop() as string
-        }
-
-        // Continue if regular style=''
-        if ( property === 'style' && !prefixes.length ) continue
-
-        // Continue if property is not on the whitelist and it is also not a custom css property
-        if ( propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' ) continue
-
-        // Auto import from google fonts
-        if( property.startsWith('font'))
-        {
-            if ( property === 'font-family' )
+            if ( !attributeValue || attributeName === 'content' ) continue
+            
+            const prefixes = attributeName.split( ':' )
+            let suffix = null
+            let property = prefixes.pop() as string
+            let propertyValue = attributeValue
+            
+            // Check if we should wrap the value later
+            if ( prefixes.length > 0 && propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' )
             {
-                property = property.substring(0, 11)
-                map.fonts[propertyValue.substring(0, propertyValue.indexOf(',')).replaceAll(' ', '+')] = { 
-                    weights: new Set(), 
-                    styles: new Set()
-                }
-                suffix = null
+                suffix = property 
+                property = prefixes.pop() as string
             }
-            else if( Object.keys(map.fonts).length )
+            
+            // Continue if regular style=''
+            if ( property === 'style' && !prefixes.length ) continue
+            
+            // Continue if property is not on the whitelist and it is also not a custom css property
+            if ( propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' ) continue
+            
+            // Auto import from google fonts
+            if( property.startsWith('font'))
             {
-                for( const key of Object.keys(map.fonts)) map.fonts[key]?.[property.substring(5)+'s']?.add( propertyValue )
-            }
-        }
-
-        // Wrap the value based on suffix
-        if ( suffix !== null )
-        {
-            if ( suffix === 'url' ) propertyValue = `url('${propertyValue}')`
-            else if ( suffix === 'var' ) propertyValue = `var(--${propertyValue})`
-            else propertyValue = `${suffix}(${propertyValue})`
-        } else if ( property === 'content' ) propertyValue = `'${propertyValue}'`
-        
-        const rule = {
-            wrappingMediaQuery: { display: null, conditions: '' } as { [key: string]: null | string },
-            selector: `[${escapeSelector(attributeName)}${map.propertyCounts[property] > 0 ? `="${attributeValue}"` : ''}]`
-        }
-        
-        let addToSelectorAfterwards = null
-        for ( const prefix of prefixes )
-        {
-            if ( prefix[0] === '@' )
-            {
-                if ( prefix === '@screen' ) rule.wrappingMediaQuery.display = 'screen'
-                else if ( prefix === '@print' ) rule.wrappingMediaQuery.display = 'print'
-                else if ( prefix === '@dark' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
-                else if ( prefix === '@light' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
-                else if ( prefix.startsWith('@only-') ) rule.wrappingMediaQuery.display = 'only ' + prefix.substring(6)
-                else 
+                if ( property === 'font-family' )
                 {
-                    const lastDashIndex = prefix.lastIndexOf('-')
-                    rule.wrappingMediaQuery.conditions += `(${prefix.substring(1, lastDashIndex)}: ${prefix.substring(lastDashIndex + 1)})`
+                    property = property.substring(0, 11)
+                    map.fonts[propertyValue.substring(0, propertyValue.indexOf(',')).replaceAll(' ', '+')] = { 
+                        weights: new Set(), 
+                        styles: new Set()
+                    }
+                    suffix = null
+                }
+                else if( Object.keys(map.fonts).length )
+                {
+                    for( const key of Object.keys(map.fonts)) map.fonts[key]?.[property.substring(5)+'s']?.add( propertyValue )
                 }
             }
-            else if ( prefix.startsWith('nth-child') ) rule.selector += ':nth-child-' + prefix.substring(9)
-            else if ( prefix.startsWith('nth-of-type') ) rule.selector += ':nth-of-type-' + prefix.substring(12)
-            else if ( prefix === 'children' ) rule.selector += ' > *'
-            else if ( prefix === 'sibling' ) rule.selector += ' + *'
-            else if ( prefix === 'siblings' ) rule.selector += ' ~ *'
-            else if ( prefix.startsWith( 'group-' ) )
+
+            // Wrap the value based on suffix
+            if ( suffix !== null )
             {
-                addToSelectorAfterwards = rule.selector
-                rule.selector = `[group="${prefix.substring(6)}"]`
+                if ( suffix === 'url' ) propertyValue = `url('${propertyValue}')`
+                else if ( suffix === 'var' ) propertyValue = `var(--${propertyValue})`
+                else propertyValue = `${suffix}(${propertyValue})`
+            } else if ( property === 'content' ) propertyValue = `'${propertyValue}'`
+            
+            // TODO: improve escapeSelector performance (50% performance impact)
+            const rule = {
+                wrappingMediaQuery: { display: null, conditions: '' } as { [key: string]: null | string },
+                selector: `[${escapeSelector(attributeName)}${map.propertyCounts[property] > 0 ? `="${attributeValue}"` : ''}]`
             }
-            else rule.selector += `:${prefix}`
+            
+            let addToSelectorAfterwards = null
+            for ( const prefix of prefixes )
+            {
+                if ( prefix[0] === '@' )
+                {
+                    if ( prefix === '@screen' ) rule.wrappingMediaQuery.display = 'screen'
+                    else if ( prefix === '@print' ) rule.wrappingMediaQuery.display = 'print'
+                    else if ( prefix === '@dark' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
+                    else if ( prefix === '@light' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
+                    else if ( prefix.startsWith('@only-') ) rule.wrappingMediaQuery.display = 'only ' + prefix.substring(6)
+                    else 
+                    {
+                        const lastDashIndex = prefix.lastIndexOf('-')
+                        rule.wrappingMediaQuery.conditions += `(${prefix.substring(1, lastDashIndex)}: ${prefix.substring(lastDashIndex + 1)})`
+                    }
+                }
+                else if ( prefix.startsWith('nth-child') ) rule.selector += ':nth-child-' + prefix.substring(9)
+                else if ( prefix.startsWith('nth-of-type') ) rule.selector += ':nth-of-type-' + prefix.substring(12)
+                else if ( prefix === 'children' ) rule.selector += ' > *'
+                else if ( prefix === 'sibling' ) rule.selector += ' + *'
+                else if ( prefix === 'siblings' ) rule.selector += ' ~ *'
+                else if ( prefix.startsWith( 'group-' ) )
+                {
+                    addToSelectorAfterwards = rule.selector
+                    rule.selector = `[group="${prefix.substring(6)}"]`
+                }
+                else rule.selector += `:${prefix}`
+            }
+            if ( addToSelectorAfterwards ) rule.selector += ` ${addToSelectorAfterwards}`
+    
+            let mediaQueryString;
+            if ( rule.wrappingMediaQuery.display )
+            {
+                let string = rule.wrappingMediaQuery.display as string
+                if ( (rule.wrappingMediaQuery.conditions as string).length ) string += ` and ${rule.wrappingMediaQuery.conditions}`
+                
+                mediaQueryString = string
+            }
+            else mediaQueryString = rule.wrappingMediaQuery.conditions as string || ''
+            
+            const key = property !== 'style' ? `${property}:${propertyValue}` : propertyValue
+            
+            map.medias[mediaQueryString] ??= {}
+            map.medias[mediaQueryString][key] ??= []
+            map.medias[mediaQueryString][key].push(rule.selector)
+            map.propertyCounts[property] = map.propertyCounts[property] || 0 + 1
         }
-        if ( addToSelectorAfterwards ) rule.selector += ` ${addToSelectorAfterwards}`
- 
-        let mediaQueryString;
-        if ( rule.wrappingMediaQuery.display )
-        {
-            let string = rule.wrappingMediaQuery.display as string
-            if ( (rule.wrappingMediaQuery.conditions as string).length ) string += ` and ${rule.wrappingMediaQuery.conditions}`
-
-            mediaQueryString = string
-        }
-        else mediaQueryString = rule.wrappingMediaQuery.conditions as string || ''
-
-        const key = property !== 'style' ? `${property}:${propertyValue}` : propertyValue
-
-        map.medias[mediaQueryString] ??= {}
-        map.medias[mediaQueryString][key] ??= []
-        map.medias[mediaQueryString][key].push(rule.selector)
-        map.propertyCounts[property] ??= 0
-        map.propertyCounts[property] += 1
     }
 
     return map
@@ -152,9 +160,9 @@ export function getCSS( map: Map = { imports: [], fonts: {}, medias: {}, propert
 }
 
 export default function generate( html: string )
-{
-    const attributes = getAttributes( html )
-    const map = getMap( attributes )
+{    
+    const elements = getElements(html)
+    const map = getMap( elements )
     const css = getCSS( map )
 
     return css
