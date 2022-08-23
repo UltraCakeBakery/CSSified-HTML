@@ -73,12 +73,12 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
                     entry.wrappingMediaQuery.conditions += `(${prefix.substring(1, lastDashIndex)}: ${prefix.substring(lastDashIndex + 1)})`
                 }
             }
-            else if ( prefix.indexOf('nth-child') !== -1 ) entry.selector += ':nth-child-' + prefix.substring(9)
-            else if ( prefix.indexOf('nth-of-type') !== -1 ) entry.selector += ':nth-of-type-' + prefix.substring(12)
+            else if ( prefix.startsWith('nth-child') ) entry.selector += ':nth-child-' + prefix.substring(9)
+            else if ( prefix.startsWith('nth-of-type') ) entry.selector += ':nth-of-type-' + prefix.substring(12)
             else if ( prefix === 'children' ) entry.selector += ' > *'
             else if ( prefix === 'sibling' ) entry.selector += ' + *'
             else if ( prefix === 'siblings' ) entry.selector += ' ~ *'
-            else if ( prefix.indexOf( 'group-' ) !== -1)
+            else if ( prefix.startsWith( 'group-' ) )
             {
                 addToSelectorAfterwards = entry.selector
                 entry.selector = `[group="${prefix.substring(6)}"]`
