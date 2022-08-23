@@ -17,6 +17,8 @@ export function getAttributes( html = '' )
 export function getMap( attributes: IterableIterator<RegExpMatchArray> )
 {
     const map: Map = { 
+        imports: [],
+        fonts: {},
         medias: {}, 
         propertyCounts: {}
     }
@@ -39,10 +41,25 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
 
         // Continue if regular style=''
         if ( property === 'style' && !prefixes.length ) continue
-        if ( property === 'content' ) propertyValue = `'${propertyValue}'`
 
         // Continue if property is not on the whitelist and it is also not a custom css property
         if ( propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' ) continue
+
+        // Auto import from google fonts
+        if( property.startsWith('font'))
+        {
+            if ( property === 'font-family' )
+            {
+                property = property.substring(0, 11)
+                map.fonts[propertyValue.substring(0, propertyValue.indexOf(',')).replaceAll(' ', '+')] = { weights: [], styles: [] }
+                suffix = null
+            }
+            else if( map.fonts[propertyValue] )
+            {
+                if ( property === 'font-weight' ) map.fonts[propertyValue].weights.push( propertyValue )
+                else if ( property === 'font-style' ) map.fonts[propertyValue].styles.push( propertyValue )
+            }
+        }
 
         // Wrap the value based on suffix
         if ( suffix !== null )
@@ -50,9 +67,9 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
             if ( suffix === 'url' ) propertyValue = `url('${propertyValue}')`
             else if ( suffix === 'var' ) propertyValue = `var(--${propertyValue})`
             else propertyValue = `${suffix}(${propertyValue})`
-        }
+        } else if ( property === 'content' ) propertyValue = `'${propertyValue}'`
         
-        const entry = {
+        const rule = {
             wrappingMediaQuery: { display: null, conditions: '' } as { [key: string]: null | string },
             selector: `[${escapeSelector(attributeName)}${map.propertyCounts[property] > 0 ? `="${attributeValue}"` : ''}]`
         }
@@ -62,46 +79,46 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
         {
             if ( prefix[0] === '@' )
             {
-                if ( prefix === '@screen' ) entry.wrappingMediaQuery.display = 'screen'
-                else if ( prefix === '@print' ) entry.wrappingMediaQuery.display = 'print'
-                else if ( prefix === '@dark' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
-                else if ( prefix === '@light' ) entry.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
-                else if ( prefix.startsWith('@only-') ) entry.wrappingMediaQuery.display = 'only ' + prefix.substring(6)
+                if ( prefix === '@screen' ) rule.wrappingMediaQuery.display = 'screen'
+                else if ( prefix === '@print' ) rule.wrappingMediaQuery.display = 'print'
+                else if ( prefix === '@dark' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
+                else if ( prefix === '@light' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
+                else if ( prefix.startsWith('@only-') ) rule.wrappingMediaQuery.display = 'only ' + prefix.substring(6)
                 else 
                 {
                     const lastDashIndex = prefix.lastIndexOf('-')
-                    entry.wrappingMediaQuery.conditions += `(${prefix.substring(1, lastDashIndex)}: ${prefix.substring(lastDashIndex + 1)})`
+                    rule.wrappingMediaQuery.conditions += `(${prefix.substring(1, lastDashIndex)}: ${prefix.substring(lastDashIndex + 1)})`
                 }
             }
-            else if ( prefix.startsWith('nth-child') ) entry.selector += ':nth-child-' + prefix.substring(9)
-            else if ( prefix.startsWith('nth-of-type') ) entry.selector += ':nth-of-type-' + prefix.substring(12)
-            else if ( prefix === 'children' ) entry.selector += ' > *'
-            else if ( prefix === 'sibling' ) entry.selector += ' + *'
-            else if ( prefix === 'siblings' ) entry.selector += ' ~ *'
+            else if ( prefix.startsWith('nth-child') ) rule.selector += ':nth-child-' + prefix.substring(9)
+            else if ( prefix.startsWith('nth-of-type') ) rule.selector += ':nth-of-type-' + prefix.substring(12)
+            else if ( prefix === 'children' ) rule.selector += ' > *'
+            else if ( prefix === 'sibling' ) rule.selector += ' + *'
+            else if ( prefix === 'siblings' ) rule.selector += ' ~ *'
             else if ( prefix.startsWith( 'group-' ) )
             {
-                addToSelectorAfterwards = entry.selector
-                entry.selector = `[group="${prefix.substring(6)}"]`
+                addToSelectorAfterwards = rule.selector
+                rule.selector = `[group="${prefix.substring(6)}"]`
             }
-            else entry.selector += `:${prefix}`
+            else rule.selector += `:${prefix}`
         }
-        if ( addToSelectorAfterwards ) entry.selector += ` ${addToSelectorAfterwards}`
+        if ( addToSelectorAfterwards ) rule.selector += ` ${addToSelectorAfterwards}`
  
         let mediaQueryString;
-        if ( entry.wrappingMediaQuery.display )
+        if ( rule.wrappingMediaQuery.display )
         {
-            let string = entry.wrappingMediaQuery.display as string
-            if ( (entry.wrappingMediaQuery.conditions as string).length ) string += ` and ${entry.wrappingMediaQuery.conditions}`
+            let string = rule.wrappingMediaQuery.display as string
+            if ( (rule.wrappingMediaQuery.conditions as string).length ) string += ` and ${rule.wrappingMediaQuery.conditions}`
 
             mediaQueryString = string
         }
-        else mediaQueryString = entry.wrappingMediaQuery.conditions as string || ''
+        else mediaQueryString = rule.wrappingMediaQuery.conditions as string || ''
 
         const key = property !== 'style' ? `${property}:${propertyValue}` : propertyValue
 
         map.medias[mediaQueryString] ??= {}
         map.medias[mediaQueryString][key] ??= []
-        map.medias[mediaQueryString][key].push(entry.selector)
+        map.medias[mediaQueryString][key].push(rule.selector)
         map.propertyCounts[property] ??= 0
         map.propertyCounts[property] += 1
     }
@@ -109,9 +126,16 @@ export function getMap( attributes: IterableIterator<RegExpMatchArray> )
     return map
 }
 
-export function getCSS( map: Map = { medias: {}, propertyCounts: {} } )
+export function getCSS( map: Map = { imports: [], medias: {}, propertyCounts: {} } )
 {
     let css = ''
+
+    for( const _import of map.imports ) css += `@import '${_import}';`
+
+    for( const [font, { styles, weights }] of Object.entries( map.fonts ) )
+    {
+        css += `@import 'https://fonts.googleapis.com/css2?family=${font}${styles.length ? ':' + styles.join(',') + ',' : ''}${weights.length ? `:wght@${weights.join(';')}` : ''}&display=swap';`.replaceAll('::', ':')
+    }
 
     for ( const [ media, valuesAndTheirSelectors ] of Object.entries( map.medias ) )
     {
