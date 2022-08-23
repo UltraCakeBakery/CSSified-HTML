@@ -1,29 +1,31 @@
 # [html-css-attributes](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/html-css-attributes.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/html-css-attributes.svg?style=flat)](https://www.npmjs.com/package/html-css-attributes) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-If you are already familiar with Tailwind CSS or similar projects, think of html-css-attributes as an **HTML friendly** alternative, which provides a more **natural feeling developer experience** while being the **best performer** in every relevant context. html-css-attributes brings a whole bunch of **additional cool features** to your HTML elements through custom attributes, allowing you to take your codebase to the **next level**, by taking one step back in complexity and two steps forward in **readability** and **understandability**. 
+If you are already familiar with Tailwind CSS or similar projects, think of html-css-attributes as an **HTML friendly** alternative. html-css-attributes brings a bunch of new **exciting** attributes to your HTML elements that allow you to take your codebase to the **next level**. You will **never** have to write or fallback to CSS ever again! Instead you just configure elements right from the HTML that defines them.
 
 ## Features
-- 🦾 Every CSS property, selector and media query is now available as attributes on your HTML elements. [Full list](#documentation)
-- 🧑‍🎨 The `style=""` attribute now also supports states (`hover:style=""`), media query `@landscape:style=""` [and more](#documentation)
-- 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (< 0.5ms average)
+- 🦾 CSS property attributes - every html element now has an attribute for every CSS property, with support for complex selectors and media queries. [Read more](#documentation)
+- 🧑‍🎨 Improved `style` attribute - `style=""` now also has state (`hover:style=""`), media query `@landscape:style=""` [and more variants ](#documentation)
+- ✒️ Automatic CDN Font Import - Automatically load fonts from CDN like google fonts through `font-family:google="Roboto"`
+- 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (1ms average)
 - 🤏 ~3kb min+gzip - Zero dependencies and browser friendly.
 - 🔌A Vite plugin is available for every framework (with SSR support) (W.I.P)
-- 📇 Named groups - For more complex UI and senarios. Simply `group="banana"` and `group-banana:hover:background-color="red"` 
+- 📇 Named groups - For more complex UI and senarios. Simply `group="banana"` and `group-banana:hover:background-color="red"`
 - 🛣️ [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping and managing design systems
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
 
 ## Example
 ```vue
-<html font-family="'Times New Roman', Times, serif">
+<html font-family:google="Roboto, sans-serif">
     <head>
         <title>Example website html</title>
     </head>
-    <body margin="0px" background-color="#F0F0F0" @dark:background-color="#020202" @dark:@high-contrast:background-color="black">
-        <nav display="flex" justify-content="space-between" flex-direction="row" width="100%" height="50px" @print:display="none">
-            <div hover:children:text-decoration="underline">
-                <a href="/home" display="inline-block">HOME</a>
-                <a href="/about" display="inline-block">ABOUT</a>
-                <a href="/contact" display="inline-block">CONTACT</a>
+    <body margin="0px" background-color="#F0F0F0" @dark:background-color="#020202" @dark:background-color="black">
+        <nav display="flex" justify-content="space-between" flex-direction="row" width="100%" height="50px"
+            @print:display="none">
+            <div children:hover:text-decoration="underline" children:display="inline-block">
+                <a href="/home">HOME</a>
+                <a href="/about">ABOUT</a>
+                <a href="/contact">CONTACT</a>
             </div>
             <div>
                 <button border-radius="2rem" hover:background-color="purple" border="none">CALL ME</button>
@@ -32,10 +34,11 @@ If you are already familiar with Tailwind CSS or similar projects, think of html
     </body>
 </html>
 ```
+```txt
+generated css in: 0.0429ms (average of 100_000 runs)
+@import 'https://fonts.googleapis.com/css2?family=Roboto&display=swap';[font-family\:google]{font-family:Roboto, sans-serif}[margin]{margin:0px}[background-color]{background-color:#F0F0F0}[display]{display:flex}[justify-content]{justify-content:space-between}[flex-direction]{flex-direction:row}[width]{width:100%}[height]{height:50px}[hover\:children\:text-decoration]:hover > *{text-decoration:underline}[children\:display="inline-block"] > *{display:inline-block}[border-radius]{border-radius:2rem}[hover\:background-color="purple"]:hover{background-color:purple}[border]{border:none}@media (prefers-color-scheme: dark){[\@dark\:background-color="#020202"]{background-color:#020202}[\@dark\:background-color="black"]{background-color:black}}@media print{[\@print\:display="none"]{display:none}}
 ```
-generated css in 0.0385 milliseconds (average of 1_000_000 total runs):
-[font-family="Times New Roman, Times, serif"]{font-family:Times New Roman, Times, serif}[padding="0px"]{padding:0px}[margin="0px"]{margin:0px}[background-image="url('./background.png')"]{background-image:url('./background.png')}[\:width="123px"],[group="apple"] [group-apple\:width="123px"]{width:123px}[display="flex"]{display:flex}[justify-content="space-between"]{justify-content:space-between}[flex-direction="row"]{flex-direction:row}[width="100%"]{width:100%}[height="50px"]{height:50px}[display="inline-block"]{display:inline-block}[\:background="red"]{background:red}[border-radius="5px"]{border-radius:5px}[\:background-color="purple"],[background-color="purple"]{background-color:purple}[\:background-color="red"],[background-color="red"]{background-color:red}@media only print{[\@print\:background="red"]{background:red}}@media (prefers-color-scheme: dark){[\@dark\:background-color="red"]{background-color:red}}
-```
+<sub>Note: css is automatically minimized (including selector specificness).</sub> 
 
 ###### Disclaimer
 > 🧪 `html-css-attributes` is not yet **production-ready** Expect breaking changes and complete redesigns in the near future.
