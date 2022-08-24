@@ -10,10 +10,8 @@ export function escapeSelector( value: string ) {
     return value.replaceAll(':', '\\:').replaceAll('@', '\\@')
 }
 
-export function validateElement( element: RegExpMatchArray ) : ValidatedElement | false
-{
-    const [_, tag, attributes ] = element
-    
+export function validateElement( [_, tag, attributes ] : RegExpMatchArray ) : ValidatedElement | false
+{    
     if( !attributes.length ) return false
     
     return { 
@@ -22,11 +20,9 @@ export function validateElement( element: RegExpMatchArray ) : ValidatedElement 
     }
 }
 
-export function validateAttribute( attribute: RegExpMatchArray ) : ValidatedAttribute | false
+export function validateAttribute( [_, name, value ]: RegExpMatchArray ) : ValidatedAttribute | false
 {
-    let [_, name, value ] = attribute
-
-    if ( !value || name === 'content' ) false
+    if ( !value.length || name === 'content' ) return false
     
     const prefixes = name.split( ':' )
     let suffix = null
@@ -41,9 +37,8 @@ export function validateAttribute( attribute: RegExpMatchArray ) : ValidatedAttr
     
     if ( suffix === 'var' ) value = `var(--${value})`
     else if ( suffix === 'url' ) value = `url('${value}')`
+    else if ( property === 'content' ) value = `'${value}'`
     else if ( suffix && suffix !== 'google' ) value = `${suffix}(${value})`
-
-    if ( property === 'content' ) value = `'${value}'`
 
     return { 
         name, 
