@@ -1,6 +1,6 @@
 import generate from "html-css-attributes"
 
-const toMatch = /(<style additional-attributes[^>]*>)/
+const toMatch = /(<style html-css-attributes[^>]*>)/
 
 export default function plugin() {
     return {
@@ -8,7 +8,7 @@ export default function plugin() {
         enforce: 'pre',
         transform(code: string, id: string )
         {
-            if ( !toMatch.test(code) ) return 
+            if ( !toMatch.test( code ) ) return 
             const css = generate(code)
             if (css) return code.replace( toMatch, `$1${css}` )
         }
