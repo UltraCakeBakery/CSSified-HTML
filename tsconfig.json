@@ -12,7 +12,9 @@
     "skipLibCheck": true
   },
   "paths": {
-    "@additional-css-attributes-for-html-elements/core": ["./packages/core/index.ts"],
+    "html-css-attributes": ["./packages/core/src/index.ts"],
+    "@html-css-attributes/vite": ["./packages/vite/src/index.ts"],
+    "@html-css-attributes/runtime": ["./packages/runtime/src/index.ts"],
   },
   "exclude": [
     "**/dist/**",

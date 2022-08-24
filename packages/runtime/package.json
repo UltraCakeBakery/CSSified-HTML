@@ -17,9 +17,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "tsup src/index.ts --format cjs,esm,iife",
-    "dev:watch": "tsup src/index.ts --format cjs,esm,iife --watch",
-    "build": "tsup src/index.ts --format cjs,esm,iife --minify"
+    "dev": "tsup src/index.ts --format esm,cjs,iife --sourcemap --dts",
+    "dev:watch": "tsup src/index.ts --format esm,cjs,iife --sourcemap --dts --watch",
+    "build": "tsup src/index.ts --format esm,cjs,iife --minify --sourcemap --dts"
   },
   "exports": {
     ".": {

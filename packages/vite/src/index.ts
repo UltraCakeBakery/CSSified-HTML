@@ -4,7 +4,7 @@ const toMatch = /(<style additional-attributes[^>]*>)/
 
 export default function plugin() {
     return {
-        name: 'additional-css-attributes-for-html-elements',
+        name: 'html-css-attributes',
         enforce: 'pre',
         transform(code: string, id: string )
         {
