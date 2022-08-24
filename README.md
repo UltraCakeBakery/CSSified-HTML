@@ -15,28 +15,38 @@ If you are already familiar with Tailwind CSS or similar projects, think of html
 
 ## Example
 ```vue
-<html font-family:google="Roboto, sans-serif">
-    <head>
-        <title>Example website html</title>
+<html lang="en" font-family:google="Roboto Condensed,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji" -webkit-font-smoothing="antialiased"><head @only-screen:background="red">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script async="" defer="" src="../packages/runtime/dist/index.global.js"></script>
     </head>
-    <body margin="0px" background-color="#F0F0F0" @dark:background-color="#020202" @dark:background-color="black">
-        <nav display="flex" justify-content="space-between" flex-direction="row" width="100%" height="50px"
-            @print:display="none">
-            <div children:hover:text-decoration="underline" children:display="inline-block">
-                <a href="/home">HOME</a>
-                <a href="/about">ABOUT</a>
-                <a href="/contact">CONTACT</a>
-            </div>
-            <div>
-                <button border-radius="2rem" hover:background-color="purple" border="none">CALL ME</button>
+    <body font-weight="400" margin="0" background="#F9F9F9" color="#030303" @max-width-200px:background="green">
+        <animation name="example">
+            <keyframe frame="from" background-color="red"></keyframe>
+            <keyframe frame="to" background-color="green"></keyframe>
+        </animation>
+        <nav height="80px" font-style="italic">
+            <div margin="0px auto" height="inherit" width="1200px" display="flex" align-items="center" justify-content="space-between" flex-direction="row">
+                <div color="teal" font-weight="800">CSS-HTML-ATTRIBUTES</div>
+                <div display="flex" flex-direction="row" justify-content="center" align-items="center" gap="1rem" children:style="text-decoration: none; color: inherit;font-weight: 500;">
+                    <a href="/">Home</a>
+                    <a href="/documentation">Documentation</a>
+                    <a href="/tutorial">Tutorial</a>
+                    <a href="/examples">Components</a>
+                </div>
             </div>
         </nav>
+        <div animation="example 4s" padding="40px">
+            I'm animated by a animation defined through an HTML element!
+        </div>
     </body>
 </html>
 ```
 ```txt
-generated css in: 0.0429ms (average of 100_000 runs)
-@import 'https://fonts.googleapis.com/css2?family=Roboto&display=swap';[font-family\:google]{font-family:Roboto, sans-serif}[margin]{margin:0px}[background-color]{background-color:#F0F0F0}[display]{display:flex}[justify-content]{justify-content:space-between}[flex-direction]{flex-direction:row}[width]{width:100%}[height]{height:50px}[hover\:children\:text-decoration]:hover > *{text-decoration:underline}[children\:display="inline-block"] > *{display:inline-block}[border-radius]{border-radius:2rem}[hover\:background-color="purple"]:hover{background-color:purple}[border]{border:none}@media (prefers-color-scheme: dark){[\@dark\:background-color="#020202"]{background-color:#020202}[\@dark\:background-color="black"]{background-color:black}}@media print{[\@print\:display="none"]{display:none}}
+generated css in: 0.0891ms (average of 100_000 runs)
+@keyframes example{from{background-color:red}to{background-color:green}}@import 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:italic,:wght@400;800&display=swap';[font-family\:google]{font-family:Roboto Condensed,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji}[-webkit-font-smoothing]{-webkit-font-smoothing:antialiased}[font-weight]{font-weight:400}[margin]{margin:0}[background="#F9F9F9"]{background:#F9F9F9}[color]{color:#030303}animation{display:none}[height]{height:80px}[font-style]{font-style:italic}[margin="0px auto"]{margin:0px auto}[height="inherit"]{height:inherit}[width]{width:1200px}[display],[display="flex"]{display:flex}[align-items],[align-items="center"]{align-items:center}[justify-content]{justify-content:space-between}[flex-direction],[flex-direction="row"]{flex-direction:row}[color="teal"]{color:teal}[font-weight="800"]{font-weight:800}[justify-content="center"]{justify-content:center}[gap]{gap:1rem}[children\:style] > *{text-decoration: none; color: inherit;font-weight: 500;}[animation]{animation:example 4s}[padding]{padding:40px}@media only screen{[\@only-screen\:background]{background:red}}@media (max-width: 200px){[\@max-width-200px\:background="green"]{background:green}}
 ```
 <sub>Note: css is automatically minimized (including selector specificness).</sub> 
 
