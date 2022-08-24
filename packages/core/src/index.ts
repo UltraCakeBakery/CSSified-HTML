@@ -77,92 +77,112 @@ export function getMap( html: string, map: Map = {} )
         
         if( elementTag === 'animation' )
         {
-            lastAnimation = element
-
+            // @ts-ignore
+            lastAnimation = elementAttributes.find( ({name}) => name === 'name' ).value
+            
             map.medias['']['display:none'] ??= []
             if (map.medias['']['display:none'].indexOf('animation') === -1) map.medias['']['display:none'].push('animation')
+            
+            map.animations[lastAnimation] = {}
+        }
+        else if( elementTag === 'keyframe')
+        {
+            if( !lastAnimation ) continue
+            
+            // @ts-ignore
+            const frame = elementAttributes.find( ({name}) => name === 'frame' ).value
+
+            for ( let { name, value, property } of elementAttributes )
+            {
+                if( property === 'frame' ) continue
+                map.animations[lastAnimation][frame] ??= []
+                map.animations[lastAnimation][frame].push( `${property}:${value}` )
+            }
+        }
+        else
+        {
+            for ( let { name, value, property,  prefixes, suffix } of elementAttributes )
+            {            
+                // Continue if property is not on the whitelist
+                // AND if it is also not a custom css property or prefixed property 
+                if ( propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' ) continue
+                
+                // Create object representing a css rule for `map`
+                const rule = {
+                    wrappingMediaQuery: { display: null, conditions: '' } as { display: null | string, conditions: string },
+                    selector: `[${escapeSelector(name)}${map.propertyCounts[property] > 0 ? `="${value}"` : ''}]`
+                }
+                
+                // Iterate over every `prefixes` to populate `rule`
+                let addToSelectorAfterwards = null
+                for ( const prefix of prefixes )
+                {
+                    if ( prefix[0] === '@' )
+                    {
+                        if ( prefix === '@screen' ) rule.wrappingMediaQuery.display = 'screen'
+                        else if ( prefix === '@print' ) rule.wrappingMediaQuery.display = 'print'
+                        else if ( prefix === '@dark' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
+                        else if ( prefix === '@light' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
+                        else if ( prefix.startsWith('@only-') ) rule.wrappingMediaQuery.display = 'only ' + prefix.substring(6)
+                        else 
+                        {
+                            const lastDashIndex = prefix.lastIndexOf('-')
+                            rule.wrappingMediaQuery.conditions += `(${prefix.substring(1, lastDashIndex)}: ${prefix.substring(lastDashIndex + 1)})`
+                        }
+                    }
+                    else if ( prefix.startsWith('nth-child') ) rule.selector += ':nth-child-' + prefix.substring(9)
+                    else if ( prefix.startsWith('nth-of-type') ) rule.selector += ':nth-of-type-' + prefix.substring(12)
+                    else if ( prefix === 'children' ) rule.selector += ' > *'
+                    else if ( prefix === 'sibling' ) rule.selector += ' + *'
+                    else if ( prefix === 'siblings' ) rule.selector += ' ~ *'
+                    else if ( prefix.startsWith( 'group-' ) )
+                    {
+                        addToSelectorAfterwards = rule.selector
+                        rule.selector = `[group="${prefix.substring(6)}"]`
+                    }
+                    else rule.selector += `:${prefix}`
+                }
+                if ( addToSelectorAfterwards ) rule.selector += ` ${addToSelectorAfterwards}`
+        
+                // pre-build mediaQuery for easier mapping and css generation
+                let mediaQueryString;
+                if ( rule.wrappingMediaQuery.display )
+                {
+                    mediaQueryString = rule.wrappingMediaQuery.display
+                    if ( rule.wrappingMediaQuery.conditions.length ) mediaQueryString += ` and ${rule.wrappingMediaQuery.conditions}`
+                }
+                else mediaQueryString = rule.wrappingMediaQuery.conditions
+                
+                const key = property !== 'style' ? `${property}:${value}` : value
+                
+                // Populate `map`
+                map.medias[mediaQueryString] ??= {}
+                map.medias[mediaQueryString][key] ??= []
+                map.medias[mediaQueryString][key].push(rule.selector)
+                map.propertyCounts[property] = map.propertyCounts[property] || 0 + 1
+                
+                // Special mapping procedure for fonts to allow importing from CDN in in `getCss` function
+                if( property.startsWith('font'))
+                {
+                    // TODO: redo this entirely to support the `font=""` attribute
+                    // TODO: ^ while we're at it, assign weights and styles to the correct font family
+                    // TODO: ^ by storing the last set font-family and assume the weights are related to that one.
+                    if ( property === 'font-family' )
+                    {
+                        map.fonts[value.substring( 0, value.indexOf( ',' ) ).replaceAll(' ', '+')] = { 
+                            weights: new Set(), 
+                            styles: new Set(),
+                            cdn: suffix ?? ''
+                        }
+                    }
+                    else if( Object.keys( map.fonts ).length )
+                    {
+                        for( const key of Object.keys(map.fonts)) (map.fonts[key]?.[property.substring(5)+'s'] as Set<string>)?.add( value )
+                    }
+                }
+            }
         }
 
-        for ( let { name, value, property,  prefixes, suffix } of elementAttributes )
-        {            
-            // Continue if property is not on the whitelist
-            // AND if it is also not a custom css property or prefixed property 
-            if ( propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' ) continue
-            
-            // Create object representing a css rule for `map`
-            const rule = {
-                wrappingMediaQuery: { display: null, conditions: '' } as { display: null | string, conditions: string },
-                selector: `[${escapeSelector(name)}${map.propertyCounts[property] > 0 ? `="${value}"` : ''}]`
-            }
-            
-            // Iterate over every `prefixes` to populate `rule`
-            let addToSelectorAfterwards = null
-            for ( const prefix of prefixes )
-            {
-                if ( prefix[0] === '@' )
-                {
-                    if ( prefix === '@screen' ) rule.wrappingMediaQuery.display = 'screen'
-                    else if ( prefix === '@print' ) rule.wrappingMediaQuery.display = 'print'
-                    else if ( prefix === '@dark' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: dark)'
-                    else if ( prefix === '@light' ) rule.wrappingMediaQuery.conditions += '(prefers-color-scheme: light)'
-                    else if ( prefix.startsWith('@only-') ) rule.wrappingMediaQuery.display = 'only ' + prefix.substring(6)
-                    else 
-                    {
-                        const lastDashIndex = prefix.lastIndexOf('-')
-                        rule.wrappingMediaQuery.conditions += `(${prefix.substring(1, lastDashIndex)}: ${prefix.substring(lastDashIndex + 1)})`
-                    }
-                }
-                else if ( prefix.startsWith('nth-child') ) rule.selector += ':nth-child-' + prefix.substring(9)
-                else if ( prefix.startsWith('nth-of-type') ) rule.selector += ':nth-of-type-' + prefix.substring(12)
-                else if ( prefix === 'children' ) rule.selector += ' > *'
-                else if ( prefix === 'sibling' ) rule.selector += ' + *'
-                else if ( prefix === 'siblings' ) rule.selector += ' ~ *'
-                else if ( prefix.startsWith( 'group-' ) )
-                {
-                    addToSelectorAfterwards = rule.selector
-                    rule.selector = `[group="${prefix.substring(6)}"]`
-                }
-                else rule.selector += `:${prefix}`
-            }
-            if ( addToSelectorAfterwards ) rule.selector += ` ${addToSelectorAfterwards}`
-    
-            // pre-build mediaQuery for easier mapping and css generation
-            let mediaQueryString;
-            if ( rule.wrappingMediaQuery.display )
-            {
-                mediaQueryString = rule.wrappingMediaQuery.display
-                if ( rule.wrappingMediaQuery.conditions.length ) mediaQueryString += ` and ${rule.wrappingMediaQuery.conditions}`
-            }
-            else mediaQueryString = rule.wrappingMediaQuery.conditions
-            
-            const key = property !== 'style' ? `${property}:${value}` : value
-            
-            // Populate `map`
-            map.medias[mediaQueryString] ??= {}
-            map.medias[mediaQueryString][key] ??= []
-            map.medias[mediaQueryString][key].push(rule.selector)
-            map.propertyCounts[property] = map.propertyCounts[property] || 0 + 1
-            
-            // Special mapping procedure for fonts to allow importing from CDN in in `getCss` function
-            if( property.startsWith('font'))
-            {
-                // TODO: redo this entirely to support the `font=""` attribute
-                // TODO: ^ while we're at it, assign weights and styles to the correct font family
-                // TODO: ^ by storing the last set font-family and assume the weights are related to that one.
-                if ( property === 'font-family' )
-                {
-                    map.fonts[value.substring( 0, value.indexOf( ',' ) ).replaceAll(' ', '+')] = { 
-                        weights: new Set(), 
-                        styles: new Set(),
-                        cdn: suffix ?? ''
-                    }
-                }
-                else if( Object.keys( map.fonts ).length )
-                {
-                    for( const key of Object.keys(map.fonts)) (map.fonts[key]?.[property.substring(5)+'s'] as Set<string>)?.add( value )
-                }
-            }
-        }
     }
 
     return map
@@ -174,7 +194,17 @@ export function getCSS( map: Map = {} )
 
     for( const _import of map.imports || [] ) css += `@import '${_import}';`
 
-    for( let [font, { styles, weights, cdn }] of Object.entries( map.fonts|| [] ) )
+    for( let [name, keyframes] of Object.entries( map.animations || [] ) )
+    {
+        css += `@keyframes ${name}{`
+        for( let [frame, attributes] of Object.entries( keyframes || [] ) )
+        {
+            css += `${frame}{${attributes.join(';')}}`
+        }
+        css += `}`
+    }
+
+    for( let [font, { styles, weights, cdn }] of Object.entries( map.fonts || [] ) )
     {
         if ( cdn !== 'google' ) continue
         let _styles: string[] = Array.from(styles as Set<string>)
