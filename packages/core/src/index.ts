@@ -6,6 +6,8 @@ import propertyWhitelist from './propertyWhitelist.json'
 export const elementsRegex = /<(?![\/!])(?:([\w:]*)[ ]?(.*?))>/gm
 export const attributeRegex = /([a-zA-Z0-9-_@:]*?)=["]([^"]*)/gm
 
+
+// TODO(perf): combine replaceAll calls without the use of the callback function.. somehow?
 export function escapeSelector( value: string ) {
     return value.replaceAll(':', '\\:').replaceAll('@', '\\@')
 }
@@ -27,6 +29,9 @@ export function validateAttribute( [_, name, value ]: RegExpMatchArray ) : Valid
     const prefixes = name.split( ':' )
     let suffix = null
     let property = prefixes.pop() as string
+
+    // Continue if regular style (<div style="">) attribute
+    if ( property === 'style' && !prefixes.length ) return false
     
     // Is `name` is suffixed? update `suffix` and `property` accordingly.
     if ( prefixes.length > 0 && propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' )
@@ -47,12 +52,6 @@ export function validateAttribute( [_, name, value ]: RegExpMatchArray ) : Valid
         suffix, 
         prefixes 
     }
-}
-
-// TODO:
-export function registerFontInMap( attributeMeta: any )
-{
-
 }
 
 // TODO:
@@ -86,35 +85,13 @@ export function getMap( html: string, map: Map = {} )
 
         for ( let { name, value, property,  prefixes, suffix } of elementAttributes )
         {            
-            // Continue if regular style (<div style="">) attribute
-            if ( property === 'style' && !prefixes.length ) continue
-            
             // Continue if property is not on the whitelist
             // AND if it is also not a custom css property or prefixed property 
             if ( propertyWhitelist.indexOf( property ) === -1 && property[0] !== '-' ) continue
             
-            // Special mapping procedure for fonts to allow importing from CDN in in `getCss` function
-            if( property.startsWith('font'))
-            {
-                if ( property === 'font-family' )
-                {
-                    property = property.substring(0, 11)
-                    map.fonts[value.substring(0, value.indexOf(',')).replaceAll(' ', '+')] = { 
-                        weights: new Set(), 
-                        styles: new Set(),
-                        cdn: suffix ?? ''
-                    }
-                }
-                else if( Object.keys(map.fonts).length )
-                {
-                    for( const key of Object.keys(map.fonts)) (map.fonts[key]?.[property.substring(5)+'s'] as Set<string>)?.add( value )
-                }
-            }
-
-            // TODO: improve escapeSelector performance (twice as slow as it needs to be)
             // Create object representing a css rule for `map`
             const rule = {
-                wrappingMediaQuery: { display: null, conditions: '' } as { [key: string]: null | string },
+                wrappingMediaQuery: { display: null, conditions: '' } as { display: null | string, conditions: string },
                 selector: `[${escapeSelector(name)}${map.propertyCounts[property] > 0 ? `="${value}"` : ''}]`
             }
             
@@ -149,23 +126,42 @@ export function getMap( html: string, map: Map = {} )
             }
             if ( addToSelectorAfterwards ) rule.selector += ` ${addToSelectorAfterwards}`
     
-            // pre-build mediaQuery for easier mapping
-            // TODO: move this to `getCss`
+            // pre-build mediaQuery for easier mapping and css generation
             let mediaQueryString;
             if ( rule.wrappingMediaQuery.display )
             {
-                mediaQueryString = rule.wrappingMediaQuery.display as string
-                if ( (rule.wrappingMediaQuery.conditions as string).length ) mediaQueryString += ` and ${rule.wrappingMediaQuery.conditions}`
+                mediaQueryString = rule.wrappingMediaQuery.display
+                if ( rule.wrappingMediaQuery.conditions.length ) mediaQueryString += ` and ${rule.wrappingMediaQuery.conditions}`
             }
-            else mediaQueryString = rule.wrappingMediaQuery.conditions as string || ''
+            else mediaQueryString = rule.wrappingMediaQuery.conditions
             
             const key = property !== 'style' ? `${property}:${value}` : value
             
-            // Populate map
+            // Populate `map`
             map.medias[mediaQueryString] ??= {}
             map.medias[mediaQueryString][key] ??= []
             map.medias[mediaQueryString][key].push(rule.selector)
             map.propertyCounts[property] = map.propertyCounts[property] || 0 + 1
+            
+            // Special mapping procedure for fonts to allow importing from CDN in in `getCss` function
+            if( property.startsWith('font'))
+            {
+                // TODO: redo this entirely to support the `font=""` attribute
+                // TODO: ^ while we're at it, assign weights and styles to the correct font family
+                // TODO: ^ by storing the last set font-family and assume the weights are related to that one.
+                if ( property === 'font-family' )
+                {
+                    map.fonts[value.substring( 0, value.indexOf( ',' ) ).replaceAll(' ', '+')] = { 
+                        weights: new Set(), 
+                        styles: new Set(),
+                        cdn: suffix ?? ''
+                    }
+                }
+                else if( Object.keys( map.fonts ).length )
+                {
+                    for( const key of Object.keys(map.fonts)) (map.fonts[key]?.[property.substring(5)+'s'] as Set<string>)?.add( value )
+                }
+            }
         }
     }
 
