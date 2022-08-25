@@ -5,6 +5,7 @@ If you are already familiar with Tailwind CSS or similar projects, think of html
 ## Features
 - 🦾 CSS property attributes - every html element now has an attribute for every CSS property, with support for complex selectors and media queries. [Read more](#documentation)
 - 🧑‍🎨 Improved `style` attribute - `style=""` now also has state (`hover:style=""`), media query `@landscape:style=""` [and more variants ](#documentation)
+- 🎞️ Added `<animation>` and `<keyframe>` elements - allowing you to define animations in pure HTML
 - ✒️ Automatic CDN Font Import - Automatically load fonts from CDN like google fonts through `font-family:google="Roboto"`
 - 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (1ms average)
 - 🤏 ~3kb min+gzip - Zero dependencies and browser friendly.
