@@ -3,15 +3,15 @@
 If you are already familiar with Tailwind CSS or similar projects, think of html-css-attributes as an **HTML friendly** alternative. html-css-attributes brings a bunch of new **exciting** attributes to your HTML elements that allow you to take your codebase to the **next level**. You will **never** have to write or fallback to CSS ever again! Instead you just configure elements right from the HTML that defines them.
 
 ## Features
-- 🦾 CSS property attributes - every html element now has an attribute for every CSS property, with support for complex selectors and media queries. [Read more](#documentation)
-- 🧑‍🎨 Improved `style` attribute - `style=""` now also has state (`hover:style=""`), media query `@landscape:style=""` [and more variants ](#documentation)
-- 🎞️ Added `<animation>` and `<keyframe>` elements - allowing you to define animations in pure HTML
-- ✒️ Automatic CDN Font Import - Automatically load fonts from CDN like google fonts through `font-family:google="Roboto"`
-- 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (1ms average)
-- 🤏 ~3kb min+gzip - Zero dependencies and browser friendly.
-- 🔌A Vite plugin is available for every framework (with SSR support) (W.I.P)
-- 📇 Named groups - For more complex UI and senarios. Simply `group="banana"` and `group-banana:hover:background-color="red"`
-- 🛣️ [Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping and managing design systems
+- 🦾 CSS property attributes - Every html element now has an attribute for every CSS property, with support for complex selectors and media queries. [Read more](#documentation)
+- 🧑‍🎨 Improved `style` attribute - `style=""` now also has state (`hover:style=""`), media query (`@landscape:style=""`) [and more variants ](#documentation)
+- 🎞️ New `<animation>` and `<keyframe>` elements - Define complex `@keyframes` in pure HTML
+- ✒️ Automatic CDN Fonts - Automatically `@import` fonts from CDN (example: fonts.google.com) fonts through `font-family:google="Roboto"`
+- 🏎️ Incredible performance compared to similair projects - our CSS generator is **PRACTICALLY INSTANT** at a <0.15ms average
+- 🤏 ~2.7kb min+gzip - Zero dependencies and browser friendly (any browser past > ie8).
+- 🔌~A Vite plugin is available for every framework (with SSR support)~ W.I.P
+- 📇 Named groups - For more complex UIs. Simply `group="banana"` and `group-banana:hover:background-color="red"`
+- 🛣️ ~[Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping and managing design systems~ W.I.P
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
 
 ## Example
@@ -130,15 +130,20 @@ Allows you to write `<div color:var="theme"></div>` instead of `<div color="var(
 ### The `:url` suffix
 Allows you to write `<div background:url="./background.svg"></div>` instead of `<div background="url('./background.svg')"></div>`
 
+### `:calc`, `:attr` and other suffixes `:$1`
+Any other suffix you place behind a property will wrap the attribute value to `$1(<value>)`. 
+
+Example: `<div width:calc="10px + 20px">` -> `width: calc(10px + 20px)`
+
 ## Configurations
 The following options are available on the Vite plugin:
 
 ### Shortcuts
-TODO
+TODO: write docs
 
-## Acknowledgement
+## Acknowledgements
 
-> in alphabet order
+> in alphabetical order, based on UnoCSS's "Acknowledgement" list.
 
 - [ACSS](https://acss.io/)
 - [Bootstrap Utilities](https://getbootstrap.com/docs/5.1/utilities/flex/)
@@ -149,7 +154,6 @@ TODO
 - [Twind](https://github.com/tw-in-js/twind)
 - [UnoCSS](http://github.com/unocss/unocss)
 - [Windi CSS](http://windicss.org/)
-
 
 ## License
 
