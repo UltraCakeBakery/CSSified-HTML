@@ -191,8 +191,16 @@ export function getMap( html: string, map: Map = {} )
 export function getCSS( map: Map = {} )
 {
     let css = ''
-
+    
     for( const _import of map.imports || [] ) css += `@import '${_import}';`
+
+    for( let [font, { styles, weights, cdn }] of Object.entries( map.fonts || [] ) )
+    {
+        if ( cdn !== 'google' ) continue
+        let _styles: string[] = Array.from(styles as Set<string>)
+        let _weights: string[] = Array.from(weights as Set<string>)
+        css += `@import 'https://fonts.googleapis.com/css2?family=${font}${_styles.length ? ':' + _styles.join(',') + ',' : ''}${_weights.length ? `:wght@${_weights.join(';')}` : ''}&display=swap';`.replaceAll('::', ':')
+    }
 
     for( let [name, keyframes] of Object.entries( map.animations || [] ) )
     {
@@ -202,14 +210,6 @@ export function getCSS( map: Map = {} )
             css += `${frame}{${attributes.join(';')}}`
         }
         css += `}`
-    }
-
-    for( let [font, { styles, weights, cdn }] of Object.entries( map.fonts || [] ) )
-    {
-        if ( cdn !== 'google' ) continue
-        let _styles: string[] = Array.from(styles as Set<string>)
-        let _weights: string[] = Array.from(weights as Set<string>)
-        css += `@import 'https://fonts.googleapis.com/css2?family=${font}${_styles.length ? ':' + _styles.join(',') + ',' : ''}${_weights.length ? `:wght@${_weights.join(';')}` : ''}&display=swap';`.replaceAll('::', ':')
     }
 
     for ( const [ media, valuesAndTheirSelectors ] of Object.entries( map.medias|| [] ) )
@@ -228,5 +228,4 @@ export default function generate( html: string )
 {    
     const map = getMap( html )
     return getCSS( map )
-
 }
