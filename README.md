@@ -7,7 +7,7 @@ If you are already familiar with Tailwind CSS or similar projects, think of cssi
 - 🧑‍🎨 Improved `style` attribute - `style=""` now also has state (`hover:style=""`), media query (`@landscape:style=""`) [and more variants ](#documentation)
 - 🎞️ New `<animation>` and `<keyframe>` elements - Define complex `@keyframes` in pure HTML
 - ✒️ Automatic CDN Fonts - Automatically `@import` fonts from CDN (example: fonts.google.com) fonts through `font-family:google="Roboto"`
-- 🏎️ Incredible performance compared to similair projects - our CSS generator is **PRACTICALLY INSTANT** at a <0.15ms average
+- 🏎️ Incredible performance - CSS generation is **PRACTICALLY INSTANT** at 0.15ms on average!
 - 🤏 ~2.7kb min+gzip - Zero dependencies and browser friendly (any browser past > ie8).
 - 🔌~A Vite plugin is available for every framework (with SSR support)~ W.I.P
 - 📇 Named groups - For more complex UIs. Simply `group="banana"` and `group-banana:hover:background-color="red"`
