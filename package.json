@@ -1,6 +1,6 @@
 {
   "name": "cssified-html",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Add every css properties as individual attributes on your html elements",
   "private": true,
   "main": "index.js",
