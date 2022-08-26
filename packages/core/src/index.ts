@@ -92,7 +92,7 @@ export function getMap( html: string, map: Map = {} )
             // @ts-ignore
             const frame = elementAttributes.find( ({name}) => name === 'frame' ).value
 
-            for ( let { name, value, property } of elementAttributes )
+            for ( let { value, property } of elementAttributes )
             {
                 if( property === 'frame' ) continue
                 map.animations[lastAnimation][frame] ??= []
@@ -197,8 +197,8 @@ export function getCSS( map: Map = {} )
     for( let [font, { styles, weights, cdn }] of Object.entries( map.fonts || [] ) )
     {
         if ( cdn !== 'google' ) continue
-        let _styles: string[] = Array.from(styles as Set<string>)
-        let _weights: string[] = Array.from(weights as Set<string>)
+        const _styles: string[] = Array.from(styles as Set<string>)
+        const _weights: string[] = Array.from(weights as Set<string>)
         css += `@import 'https://fonts.googleapis.com/css2?family=${font}${_styles.length ? ':' + _styles.join(',') + ',' : ''}${_weights.length ? `:wght@${_weights.join(';')}` : ''}&display=swap';`.replaceAll('::', ':')
     }
 
