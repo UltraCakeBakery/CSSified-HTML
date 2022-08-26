@@ -1,10 +1,10 @@
-import generate from "html-css-attributes"
+import generate from "cssified-html"
 
-const toMatch = /(<style html-css-attributes[^>]*>)/
+const toMatch = /(<style cssified-html[^>]*>)/
 
 export default function plugin() {
     return {
-        name: 'html-css-attributes',
+        name: 'cssified-html',
         enforce: 'pre',
         transform(code: string, id: string )
         {

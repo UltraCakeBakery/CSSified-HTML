@@ -1,16 +1,16 @@
 {
-  "name": "html-css-attributes",
+  "name": "cssified-html",
   "version": "1.0.7",
   "description": "Add every css properties as individual attributes on your html elements",
   "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UltraCakeBakery/html-css-attributes.git"
+    "url": "git+https://github.com/UltraCakeBakery/cssified-html.git"
   },
   "bugs": {
-    "url": "https://github.com/UltraCakeBakery/html-css-attributes/issues"
+    "url": "https://github.com/UltraCakeBakery/cssified-html/issues"
   },
-  "homepage": "https://github.com/UltraCakeBakery/html-css-attributes#readme",
+  "homepage": "https://github.com/UltraCakeBakery/cssified-html#readme",
   "funding": {
     "type": "patreon",
     "url": "https://www.patreon.com/jackvanderbilt"

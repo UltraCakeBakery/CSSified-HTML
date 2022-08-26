@@ -24,15 +24,15 @@ importers:
 
   packages/runtime:
     specifiers:
-      html-css-attributes: workspace:*
+      cssified-html: workspace:*
     devDependencies:
-      html-css-attributes: link:../core
+      cssified-html: link:../core
 
   packages/vite:
     specifiers:
-      html-css-attributes: workspace:*
+      cssified-html: workspace:*
     devDependencies:
-      html-css-attributes: link:../core
+      cssified-html: link:../core
 
 packages:
 

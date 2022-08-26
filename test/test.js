@@ -6,5 +6,5 @@ const html = fs.readFileSync('./test.html').toString()
 const time = performance.now()
 for(let i = 0; i < 100_000; i++ ) generate(html)
 const finalTime = performance.now()
-console.log( ( finalTime - time ) / 100_000 )
+console.log((finalTime - time) / 100_000, (finalTime - time))
 

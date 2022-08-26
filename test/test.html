@@ -1,39 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" font-family:google="Roboto Condensed,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji" -webkit-font-smoothing="antialiased">
-    <head @only-screen:background="red">
+    <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <script async defer src="../packages/runtime/dist/index.global.js"></script>
+
     </head>
-    <body font-weight="400" margin="0" background="#F9F9F9" color="#030303" @max-width-200px:background="green">
-        <animation name="example">
-            <keyframe frame="from" background-color="red"></keyframe>
-            <keyframe frame="to" background-color="green"></keyframe>
-        </animation>
-        <nav height="80px" font-style="italic" animation="example 4s">
-            <div margin="0px auto" height="inherit" width="1200px" display="flex" align-items="center" justify-content="space-between" flex-direction="row">
-                <div color="teal" font-weight="800">CSS-HTML-ATTRIBUTES</div>
-                <div display="flex" flex-direction="row" justify-content="center" align-items="center" gap="1rem" children:style="text-decoration: none; color: inherit;font-weight: 500;">
-                    <a href="/">Home</a>
-                    <a href="/documentation">Documentation</a>
-                    <a href="/tutorial">Tutorial</a>
-                    <a href="/examples">Components</a>
-                </div>
-            </div>
-        </nav>
-        <header display="flex" justify-content="center" align-items="center" flex-direction="column" width="100%" height="70vh">
-            <div text-align="center" max-width="1200px" min-width="200px" width="100%">
-                <h1 font-weight="900" font-size="3rem" display="block">
-                    Write <span color="blue">CSS</span> in <span color="orange">HTML</span> through <span color="green">Attributes</span> instead of <span color="purple">Stylesheets</span> or <span color="pink">Style tags</span>
-                </h1>
-                <div width="70%" margin="0px auto">
-                    If you are already familiar with Tailwind CSS or similar projects, think of html-css-attributes as a <strong>HTML friendly</strong>
-                    alternative. It allows you to take your codebase to the <strong>next level</strong>, by taking one step back in complexity and
-                    two steps forward in <strong>readability</strong> and <strong>understandability</strong>.
-                </div>
-            </div>
-        </header>
+    <body background="green" children:width="50px" children:transform="rotate(45deg)">
+        <div>Hallo</div>
+        <div>Hallo</div>
+        <div>Hallo</div>
+        <div>Hallo</div>
+        <div>Hallo</div>
     </body>
 </html>

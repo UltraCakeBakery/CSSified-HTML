@@ -1,9 +1,9 @@
-# [html-css-attributes](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/html-css-attributes.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/html-css-attributes.svg?style=flat)](https://www.npmjs.com/package/html-css-attributes) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
+# [cssified-html](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/cssified-html.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/cssified-html.svg?style=flat)](https://www.npmjs.com/package/cssified-html) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-If you are already familiar with Tailwind CSS or similar projects, think of html-css-attributes as an **HTML friendly** alternative. html-css-attributes brings a bunch of new **exciting** attributes to your HTML elements that allow you to take your codebase to the **next level**. You will **never** have to write or fallback to CSS ever again! Instead you just configure elements right from the HTML that defines them.
+If you are already familiar with Tailwind CSS or similar projects, think of cssified-html as an **HTML friendly** alternative. cssified-html brings a bunch of new **exciting** css related elements and attributes to your HTML that allow you to take your codebase to the **next level**. You will **never** have to write or fallback to CSS ever again! Instead you just configure your elements right from the HTML that defines them.
 
 ## Features
-- 🦾 CSS property attributes - every html element now has an attribute for every CSS property, with support for complex selectors and media queries. [Read more](#documentation)
+- 🦾 CSS property attributes - Every html element now has an attribute for every CSS property, with support for complex selectors and media queries. [Read more](#documentation)
 - 🧑‍🎨 Improved `style` attribute - `style=""` now also has state (`hover:style=""`), media query `@landscape:style=""` [and more variants ](#documentation)
 - ✒️ Automatic CDN Font Import - Automatically load fonts from CDN like google fonts through `font-family:google="Roboto"`
 - 🏎️ No parsing, no AST, no scanning, it's **PRACTICALLY INSTANT** (1ms average)
@@ -41,7 +41,7 @@ generated css in: 0.0429ms (average of 100_000 runs)
 <sub>Note: css is automatically minimized (including selector specificness).</sub> 
 
 ###### Disclaimer
-> 🧪 `html-css-attributes` is not yet **production-ready** Expect breaking changes and complete redesigns in the near future.
+> 🧪 `cssified-html` is not yet **production-ready** Expect breaking changes and complete redesigns in the near future.
 > We will update this note once we get closer to a stable v1.0 release.
 
 <!-- 
@@ -58,7 +58,7 @@ windicss     v3.5.5             869.47 ms / delta.    863.60 ms (x261.35)
 ``` -->
 
 ## Getting Started
-If you want to use the css generator programatically, simply npm install `@html-css-attributes/core` and `import generator from '@html-css-attributes/core'.
+If you want to use the css generator programatically, simply npm install `@cssified-html/core` and `import generator from '@cssified-html/core'.
 
 #### CDN
 We do not yet have a recommended CDN.
@@ -66,14 +66,14 @@ We do not yet have a recommended CDN.
 #### Vite (W.I.P)
 
 ```bash
-npm install @html-css-attributes/vite --save-dev
-yarn add @html-css-attributes/vite --save-dev
-pnpm install @html-css-attributes/vite --save-dev
+npm install @cssified-html/vite --save-dev
+yarn add @cssified-html/vite --save-dev
+pnpm install @cssified-html/vite --save-dev
 ```
 
 ```ts
 // vite.config.ts
-import HTML_CSS_Attributes from '@html-css-attributes/vite'
+import HTML_CSS_Attributes from '@cssified-html/vite'
 
 export default {
   plugins: [
