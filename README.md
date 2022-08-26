@@ -7,7 +7,7 @@ If you are already familiar with Tailwind CSS or similar projects, think of cssi
 - 🧑‍🎨 Improved `style` attribute - `style=""` now also has state (`hover:style=""`), media query (`@landscape:style=""`) [and more variants ](#documentation)
 - 🎞️ New `<animation>` and `<keyframe>` elements - Define complex `@keyframes` in pure HTML
 - ✒️ Automatic CDN Fonts - Automatically `@import` fonts from CDN (example: fonts.google.com) fonts through `font-family:google="Roboto"`
-- 🏎️ Incredible performance compared to similair projects - our CSS generator is **PRACTICALLY INSTANT** at a <0.15ms average
+- 🏎️ Incredible performance - CSS generation is **PRACTICALLY INSTANT** at 0.15ms on average!
 - 🤏 ~2.7kb min+gzip - Zero dependencies and browser friendly (any browser past > ie8).
 - 🔌~A Vite plugin is available for every framework (with SSR support)~ W.I.P
 - 📇 Named groups - For more complex UIs. Simply `group="banana"` and `group-banana:hover:background-color="red"`
@@ -15,23 +15,16 @@ If you are already familiar with Tailwind CSS or similar projects, think of cssi
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
 
 ## Example
-```vue
-<html lang="en" font-family:google="Roboto Condensed,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji" -webkit-font-smoothing="antialiased"><head @only-screen:background="red">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <script async="" defer="" src="../packages/runtime/dist/index.global.js"></script>
+```html
+<html -webkit-font-smoothing="antialiased" font-family:google="Roboto Condensed, sans-serif">
+    <head>
+        <script async defer src="../packages/runtime/dist/index.global.js"></script>
     </head>
-    <body font-weight="400" margin="0" background="#F9F9F9" color="#030303" @max-width-200px:background="green">
-        <animation name="example">
-            <keyframe frame="from" background-color="red"></keyframe>
-            <keyframe frame="to" background-color="green"></keyframe>
-        </animation>
-        <nav height="80px" font-style="italic">
-            <div margin="0px auto" height="inherit" width="1200px" display="flex" align-items="center" justify-content="space-between" flex-direction="row">
-                <div color="teal" font-weight="800">CSS-HTML-ATTRIBUTES</div>
-                <div display="flex" flex-direction="row" justify-content="center" align-items="center" gap="1rem" children:style="text-decoration: none; color: inherit;font-weight: 500;">
+    <body margin="0" background-color="white" color="#030303" @dark:style="background-color: black; color: #fff;">
+        <nav height="80px">
+            <div margin="0px auto" display="flex" align-items="center" justify-content="space-between" flex-direction="row" height="inherit" width="1200px">
+                <div color="#EE0000" font-weight="800">CSS-HTML-ATTRIBUTES</div>
+                <div display="flex" gap="1rem" justify-content="center" flex-direction="row" align-items="center" children:style="text-decoration: none; color: inherit;font-weight: 500;">
                     <a href="/">Home</a>
                     <a href="/documentation">Documentation</a>
                     <a href="/tutorial">Tutorial</a>
@@ -39,15 +32,19 @@ If you are already familiar with Tailwind CSS or similar projects, think of cssi
                 </div>
             </div>
         </nav>
-        <div animation="example 4s" padding="40px">
+        <animation name="example">
+            <keyframe frame="from" background-color="red"></keyframe>
+            <keyframe frame="to" background-color="green"></keyframe>
+        </animation>
+        <div animation="example 4s infinite" padding="40px">
             I'm animated by a animation defined through an HTML element!
         </div>
     </body>
 </html>
 ```
 ```txt
-generated css in: 0.0891ms (average of 100_000 runs)
-@keyframes example{from{background-color:red}to{background-color:green}}@import 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:italic,:wght@400;800&display=swap';[font-family\:google]{font-family:Roboto Condensed,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji}[-webkit-font-smoothing]{-webkit-font-smoothing:antialiased}[font-weight]{font-weight:400}[margin]{margin:0}[background="#F9F9F9"]{background:#F9F9F9}[color]{color:#030303}animation{display:none}[height]{height:80px}[font-style]{font-style:italic}[margin="0px auto"]{margin:0px auto}[height="inherit"]{height:inherit}[width]{width:1200px}[display],[display="flex"]{display:flex}[align-items],[align-items="center"]{align-items:center}[justify-content]{justify-content:space-between}[flex-direction],[flex-direction="row"]{flex-direction:row}[color="teal"]{color:teal}[font-weight="800"]{font-weight:800}[justify-content="center"]{justify-content:center}[gap]{gap:1rem}[children\:style] > *{text-decoration: none; color: inherit;font-weight: 500;}[animation]{animation:example 4s}[padding]{padding:40px}@media only screen{[\@only-screen\:background]{background:red}}@media (max-width: 200px){[\@max-width-200px\:background="green"]{background:green}}
+generated css in: 0.0755ms (average of 100_000 runs)
+@import 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@800&display=swap';@keyframes example{from{background-color:red}to{background-color:green}}[-webkit-font-smoothing]{-webkit-font-smoothing:antialiased}[font-family\:google]{font-family:Roboto Condensed, sans-serif}[margin]{margin:0}[background-color]{background-color:white}[color]{color:#030303}[height]{height:80px}[margin="0px auto"]{margin:0px auto}[display],[display="flex"]{display:flex}[align-items],[align-items="center"]{align-items:center}[justify-content]{justify-content:space-between}[flex-direction],[flex-direction="row"]{flex-direction:row}[height="inherit"]{height:inherit}[width]{width:1200px}[color="#EE0000"]{color:#EE0000}[font-weight]{font-weight:800}[gap]{gap:1rem}[justify-content="center"]{justify-content:center}[children\:style="text-decoration: none; color: inherit;font-weight: 500;"] > *{text-decoration: none; color: inherit;font-weight: 500;}animation{display:none}[animation]{animation:example 4s infinite}[padding]{padding:40px}@media (prefers-color-scheme: dark){[\@dark\:style]{background-color: black; color: #fff;}}
 ```
 <sub>Note: css is automatically minimized (including selector specificness).</sub> 
 
