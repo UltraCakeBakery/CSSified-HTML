@@ -1,15 +1,7 @@
-<div var--banana="red" color="var(--banana)">
-  Hello world
+<script>
+  import 'cssified-html.css'
+</script>
+
+<div background="orange" color="green" padding="20px">
+  Hello world321
 </div>
-
-<style additional-attributes></style>
-
-
-
-
-
-
-
-
-
-<div background="red" display="none"></div>
