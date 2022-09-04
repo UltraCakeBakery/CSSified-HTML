@@ -9,7 +9,7 @@ _cssified-html_ is a **HTML friendly** alternative to [Cascading Style Sheets](h
 - ✒️ **Automatic** CDN Fonts - Automatically `@import` fonts from a CDN (fonts.google.com) through `font-family:google="Roboto"`
 - 🏎️ **Incredible performance** - CSS generation is **PRACTICALLY INSTANT** at **0.15ms** on average!
 - 🤏 ~2.7kb min+gzip - Zero dependencies and browser friendly (any browser past > ie8).
-- 🔌~A **Vite plugin** is available for every framework (with **SSR** and **no-javascript** support)~ W.I.P
+- 🔌A **Vite plugin** is available for every framework (with **SSR** and **no-javascript** support)
 - 📇 Named groups - For more **complex** UIs. Simply `group="banana"` and `group-banana:hover:background-color="red"`
 - 🛣️ ~[Shortcuts](#shortcuts) - Add your own boolean attributes for quick prototyping and managing design systems~ W.I.P
 <!-- - [100.000+ CSS Icons](https://github.com/unocss/unocss/tree/main/packages/preset-icons/) - easily and performantly add icons to your website  -->
@@ -60,7 +60,15 @@ simply call `generator('<div background-color="orange">your-html-code-here</div>
 #### CDN
 We do not yet have a recommended CDN.
 
-#### Vite (W.I.P)
+#### Vite
+The official Vite plugin of `cssified-html` generates all CSS once, only when building your application for production.
+During dev we do not yet utilize HMR. This means that you'll have to restart your dev server every time you make changes.
+We're working on adding HMR support as you are reading this sentence.
+
+
+To get started... 
+
+1. Install the vite plugin with your package manager of choice:
 
 ```bash
 npm install @cssified-html/vite --save-dev
@@ -68,24 +76,40 @@ yarn add @cssified-html/vite --save-dev
 pnpm install @cssified-html/vite --save-dev
 ```
 
+2. Add the plugin to your `vite.config.js`:
+
 ```ts
 // vite.config.ts
-import HTML_CSS_Attributes from '@cssified-html/vite'
+import CSSifiedHTML from '@cssified-html/vite'
 
 export default {
   plugins: [
-    HTML_CSS_Attributes(),
+    CSSifiedHTML(),
   ]
 }
+```
+
+3. Import the virtually generated css file in your entry point (main.js) or primary layout component (__layout.svelte, layout.vue, layout.blade.php, etc)
+
+```js
+    // main.js
+    import 'cssified-html.css'
+```
+
+```html
+<!-- component example -->
+<script>
+    import 'cssified-html.css'
+</script>
 ```
 
 # Documentation
 Our documentation / demo website is not yet finished. For now you can read the instructions below. If you have any questions, feel free to raise an issue.
 
 ## CSS properties
-We have made a new attribute for every CSS property available on your HTML elements with an identical name to their corresponding css property.
-For example:
+For every CSS property we have made a new attribute that you can add to any html element. The name of the attributes are the same as their corosponding CSS properties.
 
+Here are some basic examples:
 - `display: flex` -> `<div display="flex"></div>`
 - `transform: scale(0.5)` -> `<div transform="scale(0.5)"></div>`
 - `background: #F0F0F0` -> `<div background="#F0F0F0"></div>`
