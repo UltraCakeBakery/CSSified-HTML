@@ -31,9 +31,13 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
-    "cssified-html": "workspace:*"
+    "@types/lodash.merge": "^4.6.7",
+    "cssified-html": "workspace:*",
+    "lodash.merge": "^4.6.2"
   },
   "type": "module"
 }

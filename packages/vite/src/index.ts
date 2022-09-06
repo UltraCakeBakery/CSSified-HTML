@@ -1,9 +1,11 @@
-import generate from "cssified-html"
+import generate, { getCSS, getMap } from "cssified-html"
+import type { Map } from "cssified-html/src/types"
+import merge from 'lodash.merge'
 
 const virtualModuleId = 'cssified-html.css'
 const resolvedVirtualModuleId = '\0' + virtualModuleId
 
-const storedCode = {} as {[key: string]: string}
+let map = {} as Map
 
 export default function plugin() {
     return [
@@ -14,11 +16,11 @@ export default function plugin() {
                 if (id === virtualModuleId)  return resolvedVirtualModuleId
             },
             transform(code: string, id: string) {
-                storedCode[id] = code
+                map = merge(map, getMap(code))
             },
             transformIndexHtml(code: string)
             {
-                storedCode['__index__'] = code
+                map = merge(map, getMap(code))
             }
         },
         {
@@ -30,7 +32,7 @@ export default function plugin() {
             load(id: string) {
                 if (id === resolvedVirtualModuleId)
                 {
-                    return generate(Object.values(storedCode).join(''))
+                    return getCSS(map)
                 }
             }
         }
