@@ -1,7 +1,7 @@
 {
   "name": "@cssified-html/runtime",
-  "version": "1.1.0",
-  "description": "The runtime package for cssified-html",
+  "version": "1.0.0",
+  "description": "The runtime package for CSSified-HTML",
   "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
   "repository": {
     "type": "git",

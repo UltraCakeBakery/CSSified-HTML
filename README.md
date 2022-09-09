@@ -1,6 +1,6 @@
-# [cssified-html](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/cssified-html.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/cssified-html.svg?style=flat)](https://www.npmjs.com/package/cssified-html) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
+# [CSSified-HTML](https://just-html.dev) &middot; [![GitHub license](https://img.shields.io/github/license/UltraCakeBakery/CSSified-HTML.svg)](#LICENSE) [![npm version](https://img.shields.io/npm/v/CSSified-HTML.svg?style=flat)](https://www.npmjs.com/package/CSSified-HTML) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-_cssified-html_ is a **HTML friendly** alternative to [Cascading Style Sheets](https://developer.mozilla.org/en-US/docs/Web/CSS) (CSS) and utility frameworks like [Tailwind](https://github.com/tailwindlabs/tailwindcss) / [UnoCSS](https://github.com/unocss/unocss). _cssified-html_ adds new **almost fully** ["spec compliant"](https://html.spec.whatwg.org/multipage/custom-elements.html) elements to your HTML, and new attributes to already existing HTML elements, that allow you to **never** have a `*.css|scss|sass|less|pcss` file in your codebase ever again! Instead you just configure your elements in the same markup that defines them, and use the new elements to define `<keyframe>`'s, ~`<mixin>`'s, @`<media>` queries~ and more!
+_CSSified-HTML_ is a **HTML friendly** alternative to [Cascading Style Sheets](https://developer.mozilla.org/en-US/docs/Web/CSS) (CSS) and utility frameworks like [Tailwind](https://github.com/tailwindlabs/tailwindcss) / [UnoCSS](https://github.com/unocss/unocss). _CSSified-HTML_ adds new **almost fully** ["spec compliant"](https://html.spec.whatwg.org/multipage/custom-elements.html) elements to your HTML, and new attributes to already existing HTML elements, that allow you to **never** have a `*.css|scss|sass|less|pcss` file in your codebase ever again! Instead you just configure your elements in the same markup that defines them, and use the new elements to define `<keyframe>`'s, ~`<mixin>`'s, @`<media>` queries~ and more!
 
 ## Features
 - 🦾 CSS property attributes - Every html element now has an attribute for **every** CSS property, with support for complex selectors and media queries. Check the [documentation](#documentation) for examples and syntax instructions! 
@@ -50,18 +50,18 @@ generated css in: 0.0755ms (average of 100_000 runs)
 <sub>Note: css is automatically minimized, including selector specificness but not values.</sub> 
 
 ###### Disclaimer
-> 🧪 _cssified-html_ is **not yet production-ready**! Expect breaking changes and complete redesigns in the near future.
+> 🧪 _CSSified-HTML_ is **not yet production-ready**! Expect breaking changes and complete redesigns in the near future.
 > We will update this note once we get closer to a stable v1.0 release.
 
 ## Getting Started
-If you want to use the css generator programatically, simply npm install `@cssified-html/core` and `import generator from '@cssified-html/core'`.
+If you want to use the css generator programatically, simply npm install `@CSSified-HTML/core` and `import generator from '@CSSified-HTML/core'`.
 simply call `generator('<div background-color="orange">your-html-code-here</div>')` to get the css for that HTML. 
 
 #### CDN
 We do not yet have a recommended CDN.
 
 #### Vite
-The official Vite plugin of `cssified-html` generates all CSS once, only when building your application for production.
+The official Vite plugin of `CSSified-HTML` generates all CSS once, only when building your application for production.
 During dev we do not yet utilize HMR. This means that you'll have to restart your dev server every time you make changes.
 We're working on adding HMR support as you are reading this sentence.
 
@@ -71,16 +71,16 @@ To get started...
 1. Install the vite plugin with your package manager of choice:
 
 ```bash
-npm install @cssified-html/vite --save-dev
-yarn add @cssified-html/vite --save-dev
-pnpm install @cssified-html/vite --save-dev
+npm install @CSSified-HTML/vite --save-dev
+yarn add @CSSified-HTML/vite --save-dev
+pnpm install @CSSified-HTML/vite --save-dev
 ```
 
 2. Add the plugin to your `vite.config.js`:
 
 ```ts
 // vite.config.ts
-import CSSifiedHTML from '@cssified-html/vite'
+import CSSifiedHTML from '@CSSified-HTML/vite'
 
 export default {
   plugins: [
@@ -93,13 +93,13 @@ export default {
 
 ```js
     // main.js
-    import 'cssified-html.css'
+    import 'CSSified-HTML.css'
 ```
 
 ```html
 <!-- component example -->
 <script>
-    import 'cssified-html.css'
+    import 'CSSified-HTML.css'
 </script>
 ```
 

@@ -1,7 +1,7 @@
 {
   "name": "cssified-html",
-  "version": "1.1.0",
-  "description": "Add every css properties as individual attributes on your html elements",
+  "version": "1.0.0",
+  "description": "A Javascript library and vite-plugin that adds a bunch of new exciting CSS related elements and attributes to your HTML.",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -14,23 +14,23 @@
   "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UltraCakeBakery/cssified-html.git"
+    "url": "git+https://github.com/UltraCakeBakery/CSSified-HTML.git"
   },
   "bugs": {
-    "url": "https://github.com/UltraCakeBakery/cssified-html/issues"
+    "url": "https://github.com/UltraCakeBakery/CSSified-HTML/issues"
   },
-  "homepage": "https://github.com/UltraCakeBakery/cssified-html#readme",
+  "homepage": "https://github.com/UltraCakeBakery/CSSified-HTML#readme",
   "funding": {
     "type": "patreon",
     "url": "https://www.patreon.com/jackvanderbilt"
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^18.7.13",
-    "eslint": "^8.22.0",
+    "@types/node": "^18.7.16",
+    "eslint": "^8.23.0",
     "eslint-plugin-import": "^2.26.0",
     "tsup": "^6.2.3",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.3"
   },
   "type": "module"
 }

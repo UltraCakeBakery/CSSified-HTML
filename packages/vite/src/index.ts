@@ -2,7 +2,7 @@ import generate, { getCSS, getMap } from "cssified-html"
 import type { Map } from "cssified-html/src/types"
 import merge from 'lodash.merge'
 
-const virtualModuleId = 'cssified-html.css'
+const virtualModuleId = 'CSSified-HTML.css'
 const resolvedVirtualModuleId = '\0' + virtualModuleId
 
 let map = {} as Map
@@ -10,10 +10,10 @@ let map = {} as Map
 export default function plugin() {
     return [
         {
-            name: 'cssified-html:pre',
+            name: 'CSSified-HTML:pre',
             enforce: 'pre',
             resolveId(id: string) {
-                if (id === virtualModuleId)  return resolvedVirtualModuleId
+                if ( id === virtualModuleId ) return resolvedVirtualModuleId
             },
             transform(code: string, id: string) {
                 map = merge(map, getMap(code))
@@ -24,16 +24,13 @@ export default function plugin() {
             }
         },
         {
-            name: 'cssified-html:post',
+            name: 'CSSified-HTML:post',
             enforce: 'post',
             resolveId(id: string) {
-                if (id === virtualModuleId) return resolvedVirtualModuleId
+                if ( id === virtualModuleId ) return resolvedVirtualModuleId
             },
             load(id: string) {
-                if (id === resolvedVirtualModuleId)
-                {
-                    return getCSS(map)
-                }
+                if ( id === resolvedVirtualModuleId ) return getCSS( map )
             }
         }
     ]
