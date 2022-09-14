@@ -1,12 +1,12 @@
+import type { Plugin } from 'vite'
 import { getCSS, getMap } from '@cssified-html/core'
 import merge from 'lodash.merge'
 
 const virtualModuleId = 'CSSified-HTML.css'
-const resolvedVirtualModuleId = '\0' + virtualModuleId
 
 let map = {}
 
-export default function plugin() 
+export default function plugin(): Plugin[] 
 {
 	return [
 		{
@@ -14,7 +14,7 @@ export default function plugin()
 			enforce: 'pre',
 			resolveId( id: string ) 
 			{
-				if ( id === virtualModuleId ) return resolvedVirtualModuleId
+				if ( id === virtualModuleId ) return virtualModuleId
 			},
 			transform( code: string ) 
 			{
@@ -28,13 +28,31 @@ export default function plugin()
 		{
 			name: 'CSSified-HTML:post',
 			enforce: 'post',
-			resolveId( id: string ) 
+			handleHotUpdate({ server })
 			{
-				if ( id === virtualModuleId ) return resolvedVirtualModuleId
+				const module = server.moduleGraph.getModuleById( virtualModuleId )
+
+				if ( !module ) return
+
+				const timestamp = Date.now()
+
+				server.ws.send(
+					{
+						type: 'update',
+						updates: [
+							{
+								acceptedPath: module.url,
+								path: module.url,
+								type: 'css-update',
+								timestamp
+							}
+						]
+					}
+				)
 			},
 			load( id: string ) 
 			{
-				if ( id === resolvedVirtualModuleId ) return getCSS( map )
+				if ( id === virtualModuleId ) return getCSS( map )
 			}
 		}
 	]

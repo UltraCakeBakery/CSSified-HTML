@@ -222,7 +222,7 @@ export function getCSS( map: Map = {})
 	return css
 }
 
-export default function generate( html: string )
+export function generate( html: string )
 {    
 	const map = getMap( html )
 	return getCSS( map )
