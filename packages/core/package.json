@@ -1,5 +1,5 @@
 {
-  "name": "cssified-html",
+  "name": "@cssified-html/core",
   "version": "1.0.0",
   "description": "A Javascript library and vite-plugin that adds a bunch of new exciting CSS related elements and attributes to your HTML.",
   "author": "Jack van der Bilt <contact@managing.software> (https://managing.software)",
@@ -28,14 +28,11 @@
       "import": "./dist/index.js"
     }
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "type": "module",
-  "devDependencies": {
-    "reduce-css-calc": "^2.1.8"
-  }
+  "type": "module"
 }

@@ -12,7 +12,7 @@
     "skipLibCheck": true
   },
   "paths": {
-    "cssified-html": ["./packages/core/src/index.ts"],
+    "@cssified-html/core": ["./packages/core/src/index.ts"],
     "@cssified-html/vite": ["./packages/vite/src/index.ts"],
     "@cssified-html/runtime": ["./packages/runtime/src/index.ts"],
   },

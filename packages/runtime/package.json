@@ -33,7 +33,7 @@
   "types": "dist/index.d.ts",
   "files": ["dist"],
   "devDependencies": {
-    "cssified-html": "workspace:*"
+    "@cssified-html/core": "workspace:*"
   },
   "type": "module"
 }

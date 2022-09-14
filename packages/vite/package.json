@@ -36,7 +36,7 @@
   ],
   "devDependencies": {
     "@types/lodash.merge": "^4.6.7",
-    "cssified-html": "workspace:*",
+    "@cssified-html/core": "workspace:*",
     "lodash.merge": "^4.6.2"
   },
   "type": "module"
